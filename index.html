@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이강희 | Backend Portfolio</title>
+    <style>
+        /* 폰트 불러오기 */
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+        :root {
+            --bg-control: #0a0a0c;
+            --bg-view: #050505;
+            --border: #333;
+            --text-main: #fff;
+            --text-sub: #888;
+            --accent: #3b82f6; /* Vivid Blue */
+            
+            /* 스크롤바 컬러 */
+            --scroll-track: #0a0a0c;
+            --scroll-thumb: #333;
+            --scroll-thumb-hover: #555;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        /* [커스텀 스크롤바 디자인] */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--scroll-track); }
+        ::-webkit-scrollbar-thumb { background: var(--scroll-thumb); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--scroll-thumb-hover); }
+
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: var(--bg-view);
+            color: var(--text-main);
+            height: 100vh;
+            overflow: hidden; 
+            display: flex;
+        }
+
+        /* === [왼쪽 패널: 컨트롤러] === */
+        .control-pane {
+            width: 500px; /* 요청하신 대로 넓게 설정 유지 */
+            flex-shrink: 0;
+            height: 100%;
+            overflow-y: auto;
+            padding: 60px 40px;
+            background: var(--bg-control);
+            border-right: 1px solid var(--border);
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 10px 0 30px rgba(0,0,0,0.3);
+        }
+
+        /* 헤더 & 프로필 영역 */
+        .header { margin-bottom: 40px; padding-bottom: 30px; border-bottom: 1px solid #222; }
+        
+        /* [User 수정사항 유지] 프로필 사진 박스 */
+        .profile-box {
+            width: 380px; /* 설정하신 크기 유지 */
+            height: 160px; /* 설정하신 크기 유지 */
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 28px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform-origin: center 100%;
+            transform: scale(1.2); /* 설정하신 확대 배율 유지 */
+        }
+
+        .header h1 { font-size: 2rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 5px; }
+        .header .role { font-family: 'Space Mono', monospace; color: var(--accent); font-size: 0.9rem; font-weight: 700; }
+        .header p { margin-top: 20px; color: var(--text-sub); line-height: 1.6; font-size: 0.95rem; }
+
+        .header-links { margin-top: 20px; display: flex; gap: 15px; font-size: 0.9rem; }
+        .header-links a { color: #888; text-decoration: none; border-bottom: 1px solid #444; transition: 0.2s; }
+        .header-links a:hover { color: var(--accent); border-color: var(--accent); }
+
+        /* 네비게이션 그룹 */
+        .nav-group { margin-bottom: 40px; }
+        .nav-group h3 {
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px;
+            color: #555; margin-bottom: 15px; font-weight: 700; padding-left: 5px;
+        }
+
+        /* [네비게이션 아이템: 버튼 스타일] */
+        .nav-item {
+            display: block;
+            padding: 22px;
+            margin-bottom: 15px;
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+        }
+
+        /* Hover */
+        .nav-item:hover {
+            border-color: #666;
+            background: #161616;
+            transform: translateX(2px);
+        }
+
+        /* [Active 상태] */
+        .nav-item.active {
+            background: #000;
+            border-color: var(--accent);
+            box-shadow: -4px 4px 0 var(--accent);
+            transform: translate(4px, -4px); 
+        }
+
+        /* Active 화살표 인디케이터 */
+        .nav-item.active::before {
+            content: "▶"; 
+            position: absolute; left: -25px; top: 50%; transform: translateY(-50%);
+            color: var(--accent); font-size: 0.8rem;
+        }
+
+        .nav-title { font-size: 1.15rem; font-weight: 700; display: block; margin-bottom: 5px; color: #eee; }
+        .nav-sub { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: #666; }
+        
+        .nav-item.active .nav-title { color: #fff; }
+        .nav-item.active .nav-sub { color: var(--accent); }
+
+
+        /* === [오른쪽 패널: 뷰어] === */
+        .view-pane {
+            flex-grow: 1;
+            height: 100%;
+            background-color: var(--bg-view);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+            /* 배경 격자 패턴 */
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        /* 비네팅 효과 */
+        .view-pane::after {
+            content: ""; position: absolute; inset: 0;
+            background: radial-gradient(circle at center, transparent 30%, #000 100%);
+            pointer-events: none;
+        }
+
+        /* 콘텐츠 영역 */
+        .content-display {
+            width: 100%; height: 100%;
+            padding: 80px 100px;
+            position: absolute;
+            top: 0; left: 0;
+            opacity: 0; visibility: hidden; /* 기본적으로 숨김 */
+            transform: translateY(10px);
+            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+            overflow-y: auto;
+            z-index: 1; 
+        }
+
+        .content-display.active {
+            opacity: 1; visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* 뷰어 내부 타이포그래피 */
+        .tag-badge {
+            display: inline-block; padding: 6px 12px; border-radius: 4px;
+            border: 1px solid var(--accent); color: var(--accent);
+            font-size: 0.75rem; font-family: 'Space Mono', monospace;
+            margin-bottom: 25px; background: rgba(59,130,246,0.1);
+        }
+
+        .display-title { font-size: 3rem; font-weight: 800; line-height: 1.1; margin-bottom: 30px; letter-spacing: -1px; text-shadow: 0 0 20px rgba(0,0,0,0.5);}
+        
+        .code-block {
+            background: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 30px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            color: #ccc;
+            margin-bottom: 40px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+        .code-block::before {
+            content: "Tech & Architecture";
+            position: absolute; top: -10px; left: 20px;
+            background: var(--accent); color: #000;
+            font-size: 0.75rem; font-weight: bold; padding: 4px 10px;
+            text-transform: uppercase; border-radius: 2px;
+        }
+
+        .desc-text { color: #bbb; line-height: 1.8; margin-bottom: 40px; font-size: 1.1rem; max-width: 800px; }
+        .desc-list li { margin-bottom: 15px; color: #ccc; list-style: none; position: relative; padding-left: 25px; font-size: 1rem; }
+        .desc-list li::before { content: "•"; color: var(--accent); position: absolute; left: 5px; font-weight: bold; font-size: 1.2rem; top: -3px;}
+
+        .btn-link {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: var(--text-main); color: black; text-decoration: none;
+            padding: 14px 28px; border-radius: 6px; font-weight: 700; transition: 0.2s;
+            margin-top: 30px;
+        }
+        .btn-link:hover { background: var(--accent); color: white; box-shadow: 0 5px 15px rgba(59,130,246,0.4); }
+
+        /* 초기 안내 메시지 */
+        #placeholder-view {
+            text-align: center; color: #444; z-index: 1;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;
+        }
+        #placeholder-view h2 { font-size: 1.5rem; color: #555; margin-bottom: 10px; }
+        
+        /* Tech Stack Grid 스타일 */
+        .tech-grid {
+            padding-top: 30px;
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); /* 2열 고정 */
+            gap: 60px 80px; /* 세로 30px, 가로 40px 간격 */
+        }
+        
+        .tech-category-title {
+            color: var(--accent); 
+            margin-bottom: 15px; 
+            font-size: 1rem; 
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #333; 
+            padding-bottom: 8px;
+        }
+
+        .tech-list {
+            display: flex;
+            flex-wrap: wrap; /* 가로로 나열하다 넘치면 줄바꿈 */
+            gap: 10px;
+        }
+
+        .tech-item {
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            background: rgba(255,255,255,0.03);
+            border: 1px solid #333;
+            padding: 8px 12px;
+            border-radius: 8px;
+            color: #ccc;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        
+        .tech-item:hover { 
+            background: rgba(59, 130, 246, 0.1); 
+            border-color: var(--accent); 
+            color: #fff; 
+            transform: translateY(-2px);
+        }
+        
+        .tech-icon { width: 20px; height: 20px; object-fit: contain; }
+        
+        /* 반응형 */
+        @media (max-width: 1000px) {
+            body { flex-direction: column; height: auto; overflow: auto; }
+            .control-pane { width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border); padding: 40px 20px; }
+            .view-pane { width: 100%; height: auto; display: block; padding: 0; }
+            
+            .nav-item.active::before { content: "▼"; left: auto; right: 20px; transform: none; top: 15px; color: var(--accent); }
+            .nav-item.active { transform: none; box-shadow: 0 4px 0 var(--accent); } 
+            
+            .content-display { position: relative; opacity: 1; visibility: visible; transform: none; padding: 40px 20px; display: none; height: auto;}
+            .content-display.active { display: block; border-top: 1px solid #222; }
+            #placeholder-view { display: none; }
+            .display-title { font-size: 2.2rem; }
+            .tech-grid { grid-template-columns: 1fr; gap: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="control-pane">
+        <div class="header">
+            
+            <div class="profile-box">
+                <img src="myImg.jpg" alt="Profile" class="profile-img">
+            </div>
+
+            <h1>이강희</h1>
+            <span class="role">Backend Developer</span>
+            <p>
+                사용자 경험을 지키는 견고한 서버를 만듭니다.<br>
+                목록을 <strong>클릭</strong>하여 상세 내용을 확인하세요.
+            </p>
+            <div class="header-links">
+                <a href="https://github.com/dlrkdgml0716" target="_blank">GitHub</a>
+                <a href="#">Blog</a>
+                <a href="mailto:your@email.com">Email</a>
+            </div>
+        </div>
+
+        <div class="nav-group">
+            <h3>about me</h3>
+            <div class="nav-item" onclick="showContent('tech-stack', this)">
+                <span class="nav-title">Tech Stack</span>
+                <span class="nav-sub">Java, Spring, Infra...</span>
+            </div>
+        </div>
+
+        <div class="nav-group">
+            <h3>Projects</h3>
+            <div class="nav-item" onclick="showContent('project-1', this)">
+                <span class="nav-title">The Pixel War</span>
+                <span class="nav-sub">MSA / Redis / Kafka</span>
+            </div>
+            <div class="nav-item" onclick="showContent('project-2', this)">
+                <span class="nav-title">Bobple (밥플)</span>
+                <span class="nav-sub">School Cafeteria Service</span>
+            </div>
+            <div class="nav-item" onclick="showContent('project-3', this)">
+                <span class="nav-title">SIKJIPSA</span>
+                <span class="nav-sub">Plant Care Platform</span>
+            </div>
+        </div>
+
+        <div class="nav-group">
+            <h3>etcetera</h3>
+            <div class="nav-item" onclick="showContent('history', this)">
+                <span class="nav-title">History & Awards</span>
+                <span class="nav-sub">2025 - 2026</span>
+            </div>
+        </div>
+
+        <div class="nav-group">
+            <h3>awards</h3>
+            <div class="nav-item" onclick="showContent('history', this)">
+                <span class="nav-title">History & Awards</span>
+                <span class="nav-sub">2025 - 2026</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="view-pane">
+        
+        <div id="placeholder-view">
+            <h2>Select a project</h2>
+            <p style="color:#666;">Click on the left menu to view details.</p>
+        </div>
+
+        <div id="project-1" class="content-display">
+            <span class="tag-badge">Featured Project</span>
+            <h2 class="display-title">The Pixel War</h2>
+            
+            <div class="desc-text">
+                수천 명의 유저가 2000x2000 픽셀 캔버스에 동시에 그림을 그리는 상황을 가정한 대규모 트래픽 처리 프로젝트입니다.
+                단일 데이터베이스의 한계를 극복하고 실시간성을 보장하기 위해 마이크로서비스 아키텍처를 설계했습니다.
+            </div>
+
+            <div class="code-block">
+                backend/<br>
+                ├── msa-auth-server (JWT)<br>
+                ├── msa-socket-server (Netty)<br>
+                ├── infra-kafka (Event Broker)<br>
+                └── infra-redis (Distributed Lock)
+            </div>
+
+            <ul class="desc-list">
+                <li><strong>동시성 제어:</strong> Redisson Pub/Sub 분산 락을 사용하여 데이터 정합성 보장 (대기 시간 최적화)</li>
+                <li><strong>성능 최적화:</strong> Kafka를 이용한 비동기 Write-Back 패턴으로 DB 부하 감소</li>
+                <li><strong>확장성:</strong> 기능별 모듈 분리(MSA) 및 Docker Compose 기반 환경 구축</li>
+            </ul>
+
+            <a href="https://github.com/dlrkdgml0716" target="_blank" class="btn-link">View Repository</a>
+        </div>
+
+        <div id="project-2" class="content-display">
+            <span class="tag-badge">Web Service</span>
+            <h2 class="display-title">Bobple</h2>
+            <div class="desc-text">
+                교내 학생들을 위한 급식 예약 및 식단 관리 서비스입니다. 기존의 불편한 예약 시스템을 개선하여 직관적인 UI와 빠른 서버 응답 속도를 제공했습니다.
+            </div>
+            <div class="code-block">
+                Tech: Java 17, Spring Boot, JPA, MySQL<br>
+                Role: Backend Lead, API Design
+            </div>
+            <ul class="desc-list">
+                <li>RESTful API 설계 및 문서화 (Swagger)</li>
+                <li>복잡한 예약 로직 및 예외 처리 구현</li>
+                <li>교내 캡스톤 디자인 대상 수상작</li>
+            </ul>
+            <a href="#" class="btn-link">View Code</a>
+        </div>
+
+        <div id="project-3" class="content-display">
+            <span class="tag-badge">Mobile App Backend</span>
+            <h2 class="display-title">SIKJIPSA</h2>
+            <div class="desc-text">
+                반려 식물 집사들을 위한 관리 및 커뮤니티 앱입니다. Flutter 프론트엔드 팀과 협업하여 API를 구축했습니다.
+            </div>
+            <ul class="desc-list">
+                <li>식물 성장 일지 데이터 모델링 및 이미지 업로드 처리</li>
+                <li>커뮤니티 게시판 및 댓글 기능 구현</li>
+                <li>팀 프로젝트 협업 및 Git Flow 전략 수립</li>
+            </ul>
+            <a href="#" class="btn-link">View Code</a>
+        </div>
+
+        <div id="tech-stack" class="content-display">
+            <span class="tag-badge">My Arsenal</span>
+            <h2 class="display-title">Tech Stack</h2>
+            
+            <div class="tech-grid">
+                <div>
+                    <h4 class="tech-category-title">Languages</h4>
+                    <div class="tech-list">
+                        <div class="tech-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" class="tech-icon">
+                            Java 17
+                        </div>
+                        <div class="tech-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="tech-icon">
+                            Python
+                        </div>
+                        <div class="tech-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" class="tech-icon">
+                            C#
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="tech-category-title">Backend</h4>
+                    <div class="tech-list">
+                        <div class="tech-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" class="tech-icon">
+                            Spring Boot 3.2
+                        </div>
+                        <div class="tech-item">
+                            <img src="https://hibernate.org/images/hibernate_icon_whitebkg.svg" class="tech-icon" style="background:white; border-radius:4px;">
+                            JPA / Hibernate
+                        </div>
+                        <div class="tech-item">
+                            <span style="font-weight:bold; color:#aaa; width:24px; text-align:center;">Q</span>
+                            QueryDSL
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="tech-category-title">Frontend & Mobile</h4>
+                    <div class="tech-list">
+                        <div class="tech-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" class="tech-icon">
+                            Flutter
+                        </div>
+                        <div class="tech-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" class="tech-icon">
+                            React
+                        </div>
+                        <div class="tech-item">
+                            <img src="https://streamlit.io/images/brand/streamlit-mark-color.svg" class="tech-icon">
+                            Streamlit
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="tech-category-title">Infra & DB</h4>
+                    <div class="tech-list">
+                        <div class="tech-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" class="tech-icon">
+                            Docker / Compose
+                        </div>
+                        <div class="tech-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachekafka/apachekafka-original.svg" class="tech-icon" style="filter: brightness(0.8) invert(1);">
+                            Apache Kafka
+                        </div>
+                        <div class="tech-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" class="tech-icon">
+                            Redis (Redisson)
+                        </div>
+                        <div class="tech-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" class="tech-icon">
+                            MySQL
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="history" class="content-display">
+            <span class="tag-badge">Timeline</span>
+            <h2 class="display-title">History</h2>
+            <div style="border-left: 2px solid #333; padding-left: 30px; margin-left: 5px;">
+                <div style="margin-bottom: 40px;">
+                    <span style="color: var(--accent); font-family: 'Space Mono'; font-size: 0.9rem;">2026.01</span>
+                    <h3 style="font-size: 1.4rem; margin-top: 5px; color: #fff;">SevenValleyMans 외주</h3>
+                    <p style="color: #777; font-size: 1rem; margin-top: 5px;">크몽 웹 제작 업체 썸네일 디자인 및 제작</p>
+                </div>
+                <div style="margin-bottom: 40px;">
+                    <span style="color: var(--accent); font-family: 'Space Mono'; font-size: 0.9rem;">2025.12</span>
+                    <h3 style="font-size: 1.4rem; margin-top: 5px; color: #fff;">교내 캡스톤 디자인 대상</h3>
+                    <p style="color: #777; font-size: 1rem; margin-top: 5px;">졸업 작품 'Bobple' 최우수 수상</p>
+                </div>
+                <div style="margin-bottom: 40px;">
+                    <span style="color: var(--accent); font-family: 'Space Mono'; font-size: 0.9rem;">2025.08</span>
+                    <h3 style="font-size: 1.4rem; margin-top: 5px; color: #fff;">정보처리기사 취득</h3>
+                    <p style="color: #777; font-size: 1rem; margin-top: 5px;">한국산업인력공단</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function showContent(id, element) {
+            // 1. 모든 메뉴 active 제거
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            // 2. 현재 클릭한 메뉴 active 추가
+            element.classList.add('active');
+
+            // 3. 안내 메시지 숨기기
+            const placeholder = document.getElementById('placeholder-view');
+            if (placeholder) placeholder.style.display = 'none';
+
+            // 4. 모든 콘텐츠 숨기기
+            document.querySelectorAll('.content-display').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // 5. 선택된 콘텐츠만 보이기
+            const targetContent = document.getElementById(id);
+            if(targetContent) {
+                targetContent.classList.add('active');
+            }
+            
+            // 모바일 스크롤 처리
+            if (window.innerWidth <= 1000 && targetContent) {
+                targetContent.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
+</body>
+</html>
