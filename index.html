@@ -42,7 +42,7 @@
 
         /* === [왼쪽 패널: 컨트롤러] === */
         .control-pane {
-            width: 500px; /* 요청하신 대로 넓게 설정 유지 */
+            width: 500px;
             flex-shrink: 0;
             height: 100%;
             overflow-y: auto;
@@ -58,10 +58,9 @@
         /* 헤더 & 프로필 영역 */
         .header { margin-bottom: 40px; padding-bottom: 30px; border-bottom: 1px solid #222; }
         
-        /* [User 수정사항 유지] 프로필 사진 박스 */
         .profile-box {
-            width: 380px; /* 설정하신 크기 유지 */
-            height: 160px; /* 설정하신 크기 유지 */
+            width: 380px;
+            height: 160px;
             background: #1a1a1a;
             border: 1px solid #333;
             border-radius: 28px;
@@ -75,16 +74,58 @@
             height: 100%;
             object-fit: cover;
             transform-origin: center 100%;
-            transform: scale(1.2); /* 설정하신 확대 배율 유지 */
+            transform: scale(1.2);
         }
 
         .header h1 { font-size: 2rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 5px; }
         .header .role { font-family: 'Space Mono', monospace; color: var(--accent); font-size: 0.9rem; font-weight: 700; }
         .header p { margin-top: 20px; color: var(--text-sub); line-height: 1.6; font-size: 0.95rem; }
 
-        .header-links { margin-top: 20px; display: flex; gap: 15px; font-size: 0.9rem; }
-        .header-links a { color: #888; text-decoration: none; border-bottom: 1px solid #444; transition: 0.2s; }
-        .header-links a:hover { color: var(--accent); border-color: var(--accent); }
+        /* [수정됨] 아이콘 링크 스타일 */
+        .header-links { 
+            margin-top: 25px; 
+            display: flex; 
+            gap: 20px; 
+            align-items: center;
+        }
+        .header-links a { 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none; 
+            border: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            opacity: 0.6; 
+            padding: 5px;
+            border-radius: 8px;
+        }
+        .header-links a:hover { 
+            opacity: 1; 
+            background: rgba(255, 255, 255, 0.1); 
+            transform: translateY(-3px); 
+        }
+        .social-icon {
+            width: 24px;
+            height: 24px;
+            filter: invert(1); /* 일반 아이콘 흰색 반전 */
+        }
+
+        /* 크몽 로고 전용 스타일 */
+        .kmong-custom-icon {
+            width: 24px;
+            height: 24px;
+            background-color: #FFD400; /* 크몽 공식 노란색 */
+            color: #000; /* 글자색 검정 */
+            font-family: 'Pretendard', sans-serif;
+            font-weight: 900; /* 아주 굵게 */
+            font-size: 16px;
+            border-radius: 4px; /* 둥근 모서리 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            padding-top: 2px; /* 시각적 중앙 정렬 미세 조정 */
+        }
 
         /* 네비게이션 그룹 */
         .nav-group { margin-bottom: 40px; }
@@ -272,6 +313,23 @@
         }
         
         .tech-icon { width: 20px; height: 20px; object-fit: contain; }
+
+        /* [추가됨] 타임라인 포인트 스타일 */
+        .timeline-item {
+            margin-bottom: 40px;
+            position: relative; /* 점 위치 기준 */
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            left: -36px; /* 왼쪽 패딩 30px + 선 두께 고려하여 위치 조정 */
+            top: 7px; /* 텍스트 높이에 맞춰 조정 */
+            box-shadow: 0 0 0 4px var(--bg-view); /* 점 주변에 배경색 테두리를 줘서 선이 끊긴 느낌 */
+        }
         
         /* 반응형 */
         @media (max-width: 1000px) {
@@ -305,10 +363,15 @@
                 사용자 경험을 지키는 견고한 서버를 만듭니다.<br>
                 목록을 <strong>클릭</strong>하여 상세 내용을 확인하세요.
             </p>
+            
             <div class="header-links">
-                <a href="https://github.com/dlrkdgml0716" target="_blank">GitHub</a>
-                <a href="#">Blog</a>
-                <a href="mailto:your@email.com">Email</a>
+                <a href="https://github.com/dlrkdgml0716" target="_blank" aria-label="GitHub">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v14/icons/github.svg" class="social-icon" alt="GitHub">
+                </a>
+                
+                <a href="https://kmong.com/gig/637739" target="_blank" aria-label="Kmong" style="text-decoration: none;">
+                    <div class="kmong-custom-icon">K</div>
+                </a>
             </div>
         </div>
 
@@ -324,31 +387,26 @@
             <h3>Projects</h3>
             <div class="nav-item" onclick="showContent('project-1', this)">
                 <span class="nav-title">The Pixel War</span>
-                <span class="nav-sub">MSA / Redis / Kafka</span>
+                <span class="nav-sub">Real-time Pixel Art (Side Project)</span><br>
+                <span class="nav-sub">2026-01-02 ~</span>
             </div>
             <div class="nav-item" onclick="showContent('project-2', this)">
                 <span class="nav-title">Bobple (밥플)</span>
-                <span class="nav-sub">School Cafeteria Service</span>
+                <span class="nav-sub">School Cafeteria Service (Co-op)</span><br>
+                <span class="nav-sub">2025-09-01 ~</span>
             </div>
             <div class="nav-item" onclick="showContent('project-3', this)">
                 <span class="nav-title">SIKJIPSA</span>
-                <span class="nav-sub">Plant Care Platform</span>
+                <span class="nav-sub">Plant Care Platform (Co-op)</span><br>
+                <span class="nav-sub">2025-08-24 ~ 2025-09-08</span>
             </div>
         </div>
 
         <div class="nav-group">
-            <h3>etcetera</h3>
+            <h3>TIMELINE</h3>
             <div class="nav-item" onclick="showContent('history', this)">
                 <span class="nav-title">History & Awards</span>
-                <span class="nav-sub">2025 - 2026</span>
-            </div>
-        </div>
-
-        <div class="nav-group">
-            <h3>awards</h3>
-            <div class="nav-item" onclick="showContent('history', this)">
-                <span class="nav-title">History & Awards</span>
-                <span class="nav-sub">2025 - 2026</span>
+                <span class="nav-sub">2025 ~ 2026</span>
             </div>
         </div>
     </div>
@@ -500,22 +558,55 @@
 
         <div id="history" class="content-display">
             <span class="tag-badge">Timeline</span>
-            <h2 class="display-title">History</h2>
+            <h2 class="display-title">History & Awards</h2>
             <div style="border-left: 2px solid #333; padding-left: 30px; margin-left: 5px;">
-                <div style="margin-bottom: 40px;">
-                    <span style="color: var(--accent); font-family: 'Space Mono'; font-size: 0.9rem;">2026.01</span>
-                    <h3 style="font-size: 1.4rem; margin-top: 5px; color: #fff;">SevenValleyMans 외주</h3>
-                    <p style="color: #777; font-size: 1rem; margin-top: 5px;">크몽 웹 제작 업체 썸네일 디자인 및 제작</p>
+                
+                <div class="timeline-item">
+                    <span style="color: var(--accent); font-family: 'Space Mono'; font-size: 0.9rem;">2026.06</span>
+                    <h3 style="font-size: 1.4rem; margin-top: 5px; color: #fff;">정보처리기사 취득</h3>
+                    <p style="color: #777; font-size: 1rem; margin-top: 5px;">한국산업인력공단</p>
                 </div>
-                <div style="margin-bottom: 40px;">
-                    <span style="color: var(--accent); font-family: 'Space Mono'; font-size: 0.9rem;">2025.12</span>
+                
+                <div class="timeline-item">
+                    <span style="color: var(--accent); font-family: 'Space Mono'; font-size: 0.9rem;">2026.03</span>
+                    <h3 style="font-size: 1.4rem; margin-top: 5px; color: #fff;">OPIc IM3 취득</h3>
+                    <p style="color: #777; font-size: 1rem; margin-top: 5px;">ACTFL</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <span style="color: var(--accent); font-family: 'Space Mono'; font-size: 0.9rem;">2026.01.20</span>
                     <h3 style="font-size: 1.4rem; margin-top: 5px; color: #fff;">교내 캡스톤 디자인 대상</h3>
                     <p style="color: #777; font-size: 1rem; margin-top: 5px;">졸업 작품 'Bobple' 최우수 수상</p>
                 </div>
-                <div style="margin-bottom: 40px;">
-                    <span style="color: var(--accent); font-family: 'Space Mono'; font-size: 0.9rem;">2025.08</span>
-                    <h3 style="font-size: 1.4rem; margin-top: 5px; color: #fff;">정보처리기사 취득</h3>
-                    <p style="color: #777; font-size: 1rem; margin-top: 5px;">한국산업인력공단</p>
+
+                <div class="timeline-item">
+                    <span style="color: var(--accent); font-family: 'Space Mono'; font-size: 0.9rem;">2025.11.28</span>
+                    <h3 style="font-size: 1.4rem; margin-top: 5px; color: #fff;">한국정보기술학회 우수논문상</h3>
+                    <p style="color: #777; font-size: 1rem; margin-top: 5px;">LLM 환각 탐지가 사용자 신뢰도에 미치는 영향</p>
+                </div>
+
+                <div class="timeline-item">
+                    <span style="color: var(--accent); font-family: 'Space Mono'; font-size: 0.9rem;">2025.11.14</span>
+                    <h3 style="font-size: 1.4rem; margin-top: 5px; color: #fff;">지역혁신 인재양성 페스티발 우수상</h3>
+                    <p style="color: #777; font-size: 1rem; margin-top: 5px;">지역사회문제해결 부문 (한국정보통신보안윤리학회)</p>
+                </div>
+
+                <div class="timeline-item">
+                    <span style="color: var(--accent); font-family: 'Space Mono'; font-size: 0.9rem;">2025.08.02 ~ 2025.08.14</span>
+                    <h3 style="font-size: 1.4rem; margin-top: 5px; color: #fff;">SevenValleyMans 외주</h3>
+                    <p style="color: #777; font-size: 1rem; margin-top: 5px;">크몽 웹 제작</p>
+                </div>
+
+                <div class="timeline-item">
+                    <span style="color: var(--accent); font-family: 'Space Mono'; font-size: 0.9rem;">2025.06.01 ~ 2025.07.31</span>
+                    <h3 style="font-size: 1.4rem; margin-top: 5px; color: #fff;">SevenValleyMans 외주</h3>
+                    <p style="color: #777; font-size: 1rem; margin-top: 5px;">크몽 웹 제작</p>
+                </div>
+
+                <div class="timeline-item">
+                    <span style="color: var(--accent); font-family: 'Space Mono'; font-size: 0.9rem;">2025.01.25 ~ 2025.02.09</span>
+                    <h3 style="font-size: 1.4rem; margin-top: 5px; color: #fff;">SevenValleyMans 외주</h3>
+                    <p style="color: #777; font-size: 1rem; margin-top: 5px;">크몽 웹 제작</p>
                 </div>
             </div>
         </div>
