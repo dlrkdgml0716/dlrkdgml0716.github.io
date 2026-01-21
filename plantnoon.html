@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이강희 | Plantnoon</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="control-pane">
+        <div class="header">
+            <div class="profile-box">
+                <img src="myImg.jpg" alt="Profile" class="profile-img">
+            </div>
+            <h1>이강희</h1>
+            <span class="role">Backend Developer</span>
+            <p>사용자 경험을 지키는 견고한 서버를 만듭니다.</p>
+            <div class="header-links">
+                <a href="https://github.com/dlrkdgml0716" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v14/icons/github.svg" class="social-icon"></a>
+                <a href="https://kmong.com/gig/637739" target="_blank"><div class="kmong-custom-icon">K</div></a>
+            </div>
+        </div>
+
+        <div class="nav-group">
+            <h3>PROFILE</h3>
+            <a href="index.html" class="nav-item">
+                <span class="nav-title">about me</span>
+                <span class="nav-sub">2002-07-16</span>
+            </a>
+        </div>
+
+        <div class="nav-group">
+            <h3>Projects</h3>
+            <a href="pixelwar.html" class="nav-item">
+                <span class="nav-title">The Pixel War</span>
+                <span class="nav-sub">Side Project</span>
+            </a>
+            <a href="babple.html" class="nav-item">
+                <span class="nav-title">Babple (밥플)</span>
+                <span class="nav-sub">School Service</span>
+            </a>
+            <a href="plantnoon.html" class="nav-item active">
+                <span class="nav-title">Plantnoon</span>
+                <span class="nav-sub">Plant Care Platform</span>
+            </a>
+        </div>
+
+        <div class="nav-group">
+            <h3>TIMELINE</h3>
+            <a href="history.html" class="nav-item">
+                <span class="nav-title">History & Awards</span>
+                <span class="nav-sub">2025 ~ 2026</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="view-pane">
+        <div class="content-display">
+            <span class="tag-badge">Serverless Web App</span>
+            <h2 class="display-title">오후의 식물 (Plantnoon)</h2>
+            <div class="desc-text">
+                식집사를 위한 <strong>AI 진단 및 토탈 관리 플랫폼</strong>입니다.<br>
+                별도의 백엔드 서버 구축 없이 <strong>Firebase Serverless 아키텍처</strong>를 활용하여 사용자 인증, 데이터베이스, 파일 저장소 기능을 구현했습니다.
+            </div>
+            
+            <div class="code-block">
+                Tech: JavaScript, Firebase(Firestore, Auth, Storage), PortOne, Gemini API<br>
+                Type: Serverless Architecture, SPA
+            </div>
+
+            <div class="project-gallery">
+                <img src="plantnoon/1.png" class="project-img" alt="1">
+                <img src="plantnoon/2.png" class="project-img" alt="2">
+                <img src="plantnoon/3.png" class="project-img" alt="3">
+                <img src="plantnoon/4.png" class="project-img" alt="4">
+                <img src="plantnoon/5.png" class="project-img" alt="5">
+            </div>
+
+            <ul class="desc-list">
+                <li><strong>Serverless 아키텍처:</strong> Firebase Authentication을 이용한 사용자 인증 및 Firestore NoSQL DB 설계로 실시간 데이터 동기화 구현</li>
+                <li><strong>결제 프로세스 구현:</strong> PortOne SDK를 연동하여 정기 구독 결제 로직을 구현하고, 결제 상태에 따른 유저 등급(Free/Pro) 권한 관리</li>
+                <li><strong>AI 서비스 연동:</strong> Google Gemini API를 활용하여 업로드된 식물 이미지를 분석하고 진단하는 AI 챗봇 및 상담 기능 개발</li>
+                <li><strong>비동기 데이터 처리:</strong> Fetch API 및 Async/Await 패턴을 사용하여 쾌적한 UX의 SPA(Single Page Application) 환경 구축</li>
+            </ul>
+            <a href="#" class="btn-link">View Code</a>
+        </div>
+    </div>
+
+    <div id="image-modal" class="image-modal">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="modal-img">
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
