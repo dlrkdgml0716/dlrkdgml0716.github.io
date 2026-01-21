@@ -81,7 +81,6 @@
         .header .role { font-family: 'Space Mono', monospace; color: var(--accent); font-size: 0.9rem; font-weight: 700; }
         .header p { margin-top: 20px; color: var(--text-sub); line-height: 1.6; font-size: 0.95rem; }
 
-        /* [수정됨] 아이콘 링크 스타일 */
         .header-links { 
             margin-top: 25px; 
             display: flex; 
@@ -107,24 +106,23 @@
         .social-icon {
             width: 24px;
             height: 24px;
-            filter: invert(1); /* 일반 아이콘 흰색 반전 */
+            filter: invert(1);
         }
 
-        /* 크몽 로고 전용 스타일 */
         .kmong-custom-icon {
             width: 24px;
             height: 24px;
-            background-color: #FFD400; /* 크몽 공식 노란색 */
-            color: #000; /* 글자색 검정 */
+            background-color: #FFD400;
+            color: #000;
             font-family: 'Pretendard', sans-serif;
-            font-weight: 900; /* 아주 굵게 */
+            font-weight: 900;
             font-size: 16px;
-            border-radius: 4px; /* 둥근 모서리 */
+            border-radius: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
             line-height: 1;
-            padding-top: 2px; /* 시각적 중앙 정렬 미세 조정 */
+            padding-top: 2px;
         }
 
         /* 네비게이션 그룹 */
@@ -134,7 +132,6 @@
             color: #555; margin-bottom: 15px; font-weight: 700; padding-left: 5px;
         }
 
-        /* [네비게이션 아이템: 버튼 스타일] */
         .nav-item {
             display: block;
             padding: 22px;
@@ -146,23 +143,17 @@
             transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
             position: relative;
         }
-
-        /* Hover */
         .nav-item:hover {
             border-color: #666;
             background: #161616;
             transform: translateX(2px);
         }
-
-        /* [Active 상태] */
         .nav-item.active {
             background: #000;
             border-color: var(--accent);
             box-shadow: -4px 4px 0 var(--accent);
             transform: translate(4px, -4px); 
         }
-
-        /* Active 화살표 인디케이터 */
         .nav-item.active::before {
             content: "▶"; 
             position: absolute; left: -25px; top: 50%; transform: translateY(-50%);
@@ -185,15 +176,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            
-            /* 배경 격자 패턴 */
             background-image: 
                 linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
             background-size: 50px 50px;
         }
-        
-        /* 비네팅 효과 */
         .view-pane::after {
             content: ""; position: absolute; inset: 0;
             background: radial-gradient(circle at center, transparent 30%, #000 100%);
@@ -206,13 +193,12 @@
             padding: 80px 100px;
             position: absolute;
             top: 0; left: 0;
-            opacity: 0; visibility: hidden; /* 기본적으로 숨김 */
+            opacity: 0; visibility: hidden;
             transform: translateY(10px);
             transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
             overflow-y: auto;
             z-index: 1; 
         }
-
         .content-display.active {
             opacity: 1; visibility: visible;
             transform: translateY(0);
@@ -236,7 +222,7 @@
             font-family: 'Space Mono', monospace;
             font-size: 0.9rem;
             color: #ccc;
-            margin-bottom: 40px;
+            margin-bottom: 30px; 
             position: relative;
             box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
@@ -247,6 +233,71 @@
             font-size: 0.75rem; font-weight: bold; padding: 4px 10px;
             text-transform: uppercase; border-radius: 2px;
         }
+
+        /* === [NEW] 프로젝트 이미지 갤러리 스타일 === */
+        .project-gallery {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 40px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+        .project-img {
+            flex: 0 0 auto;
+            width: 320px;
+            height: 190px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+            filter: brightness(0.8);
+            cursor: zoom-in; /* [NEW] 확대 가능 커서 표시 */
+        }
+        .project-img:hover {
+            filter: brightness(1);
+            border-color: var(--accent);
+            transform: scale(1.02);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        /* === [NEW] 이미지 확대 모달(Lightbox) 스타일 === */
+        .image-modal {
+            display: none; /* 기본 숨김 */
+            position: fixed;
+            z-index: 9999;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        .image-modal.show {
+            opacity: 1;
+        }
+        .image-modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .image-modal.show img {
+            transform: scale(1);
+        }
+        .close-modal {
+            position: absolute;
+            top: 30px; right: 40px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10000;
+        }
+        /* =========================================== */
 
         .desc-text { color: #bbb; line-height: 1.8; margin-bottom: 40px; font-size: 1.1rem; max-width: 800px; }
         .desc-list li { margin-bottom: 15px; color: #ccc; list-style: none; position: relative; padding-left: 25px; font-size: 1rem; }
@@ -260,19 +311,17 @@
         }
         .btn-link:hover { background: var(--accent); color: white; box-shadow: 0 5px 15px rgba(59,130,246,0.4); }
 
-        /* 초기 안내 메시지 */
         #placeholder-view {
             text-align: center; color: #444; z-index: 1;
             display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;
         }
         #placeholder-view h2 { font-size: 1.5rem; color: #555; margin-bottom: 10px; }
         
-        /* Tech Stack Grid 스타일 */
         .tech-grid {
             padding-top: 30px;
             display: grid; 
-            grid-template-columns: repeat(2, 1fr); /* 2열 고정 */
-            gap: 60px 80px; /* 세로 30px, 가로 40px 간격 */
+            grid-template-columns: repeat(2, 1fr);
+            gap: 60px 80px;
         }
         
         .tech-category-title {
@@ -288,7 +337,7 @@
 
         .tech-list {
             display: flex;
-            flex-wrap: wrap; /* 가로로 나열하다 넘치면 줄바꿈 */
+            flex-wrap: wrap; 
             gap: 10px;
         }
 
@@ -304,34 +353,21 @@
             font-size: 0.9rem;
             transition: all 0.2s;
         }
-        
         .tech-item:hover { 
             background: rgba(59, 130, 246, 0.1); 
             border-color: var(--accent); 
             color: #fff; 
             transform: translateY(-2px);
         }
-        
         .tech-icon { width: 20px; height: 20px; object-fit: contain; }
 
-        /* [추가됨] 타임라인 포인트 스타일 */
-        .timeline-item {
-            margin-bottom: 40px;
-            position: relative; /* 점 위치 기준 */
-        }
+        .timeline-item { margin-bottom: 40px; position: relative; }
         .timeline-item::after {
-            content: '';
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: var(--accent);
-            border-radius: 50%;
-            left: -36px; /* 왼쪽 패딩 30px + 선 두께 고려하여 위치 조정 */
-            top: 7px; /* 텍스트 높이에 맞춰 조정 */
-            box-shadow: 0 0 0 4px var(--bg-view); /* 점 주변에 배경색 테두리를 줘서 선이 끊긴 느낌 */
+            content: ''; position: absolute; width: 10px; height: 10px;
+            background-color: var(--accent); border-radius: 50%;
+            left: -36px; top: 7px; box-shadow: 0 0 0 4px var(--bg-view);
         }
         
-        /* 반응형 */
         @media (max-width: 1000px) {
             body { flex-direction: column; height: auto; overflow: auto; }
             .control-pane { width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border); padding: 40px 20px; }
@@ -345,6 +381,10 @@
             #placeholder-view { display: none; }
             .display-title { font-size: 2.2rem; }
             .tech-grid { grid-template-columns: 1fr; gap: 40px; }
+            
+            /* 모바일 갤러리 조정 */
+            .project-img { width: 100%; height: auto; aspect-ratio: 16/9; }
+            .project-gallery { flex-direction: column; }
         }
     </style>
 </head>
@@ -391,12 +431,12 @@
                 <span class="nav-sub">2026-01-02 ~</span>
             </div>
             <div class="nav-item" onclick="showContent('project-2', this)">
-                <span class="nav-title">Bobple (밥플)</span>
+                <span class="nav-title">Babple (밥플)</span>
                 <span class="nav-sub">School Cafeteria Service (Co-op)</span><br>
                 <span class="nav-sub">2025-09-01 ~</span>
             </div>
             <div class="nav-item" onclick="showContent('project-3', this)">
-                <span class="nav-title">SIKJIPSA</span>
+                <span class="nav-title">Plantnoon</span>
                 <span class="nav-sub">Plant Care Platform (Co-op)</span><br>
                 <span class="nav-sub">2025-08-24 ~ 2025-09-08</span>
             </div>
@@ -435,6 +475,12 @@
                 └── infra-redis (Distributed Lock)
             </div>
 
+            <div class="project-gallery">
+                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80" class="project-img" alt="Architecture Diagram">
+                <img src="https://images.unsplash.com/photo-1558494949-ef526b0042a0?auto=format&fit=crop&w=800&q=80" class="project-img" alt="Server Dashboard">
+                <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=800&q=80" class="project-img" alt="Code Screenshot">
+            </div>
+
             <ul class="desc-list">
                 <li><strong>동시성 제어:</strong> Redisson Pub/Sub 분산 락을 사용하여 데이터 정합성 보장 (대기 시간 최적화)</li>
                 <li><strong>성능 최적화:</strong> Kafka를 이용한 비동기 Write-Back 패턴으로 DB 부하 감소</li>
@@ -446,7 +492,7 @@
 
         <div id="project-2" class="content-display">
             <span class="tag-badge">Web Service</span>
-            <h2 class="display-title">Bobple</h2>
+            <h2 class="display-title">Babple</h2>
             <div class="desc-text">
                 교내 학생들을 위한 급식 예약 및 식단 관리 서비스입니다. 기존의 불편한 예약 시스템을 개선하여 직관적인 UI와 빠른 서버 응답 속도를 제공했습니다.
             </div>
@@ -454,6 +500,12 @@
                 Tech: Java 17, Spring Boot, JPA, MySQL<br>
                 Role: Backend Lead, API Design
             </div>
+            
+            <div class="project-gallery">
+                <img src="https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?auto=format&fit=crop&w=800&q=80" class="project-img" alt="App Main Screen">
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80" class="project-img" alt="Code Snippet">
+            </div>
+
             <ul class="desc-list">
                 <li>RESTful API 설계 및 문서화 (Swagger)</li>
                 <li>복잡한 예약 로직 및 예외 처리 구현</li>
@@ -463,15 +515,31 @@
         </div>
 
         <div id="project-3" class="content-display">
-            <span class="tag-badge">Mobile App Backend</span>
-            <h2 class="display-title">SIKJIPSA</h2>
+            <span class="tag-badge">Serverless Web App</span>
+            <h2 class="display-title">오후의 식물 (Plantnoon)</h2>
             <div class="desc-text">
-                반려 식물 집사들을 위한 관리 및 커뮤니티 앱입니다. Flutter 프론트엔드 팀과 협업하여 API를 구축했습니다.
+                식집사를 위한 <strong>AI 진단 및 토탈 관리 플랫폼</strong>입니다.<br>
+                별도의 백엔드 서버 구축 없이 <strong>Firebase Serverless 아키텍처</strong>를 활용하여 사용자 인증, 데이터베이스, 파일 저장소 기능을 구현했습니다.
             </div>
+            
+            <div class="code-block">
+                Tech: JavaScript, Firebase(Firestore, Auth, Storage), PortOne, Gemini API<br>
+                Type: Serverless Architecture, SPA
+            </div>
+
+            <div class="project-gallery">
+                <img src="plantnoon/1.png" class="project-img" alt="1">
+                <img src="plantnoon/2.png" class="project-img" alt="2">
+                <img src="plantnoon/3.png" class="project-img" alt="3">
+                <img src="plantnoon/4.png" class="project-img" alt="4">
+                <img src="plantnoon/5.png" class="project-img" alt="5">
+            </div>
+
             <ul class="desc-list">
-                <li>식물 성장 일지 데이터 모델링 및 이미지 업로드 처리</li>
-                <li>커뮤니티 게시판 및 댓글 기능 구현</li>
-                <li>팀 프로젝트 협업 및 Git Flow 전략 수립</li>
+                <li><strong>Serverless 아키텍처:</strong> Firebase Authentication을 이용한 사용자 인증 및 Firestore NoSQL DB 설계로 실시간 데이터 동기화 구현</li>
+                <li><strong>결제 프로세스 구현:</strong> PortOne SDK를 연동하여 정기 구독 결제 로직을 구현하고, 결제 상태에 따른 유저 등급(Free/Pro) 권한 관리</li>
+                <li><strong>AI 서비스 연동:</strong> Google Gemini API를 활용하여 업로드된 식물 이미지를 분석하고 진단하는 AI 챗봇 및 상담 기능 개발</li>
+                <li><strong>비동기 데이터 처리:</strong> Fetch API 및 Async/Await 패턴을 사용하여 쾌적한 UX의 SPA(Single Page Application) 환경 구축</li>
             </ul>
             <a href="#" class="btn-link">View Code</a>
         </div>
@@ -576,7 +644,7 @@
                 <div class="timeline-item">
                     <span style="color: var(--accent); font-family: 'Space Mono'; font-size: 0.9rem;">2026.01.20</span>
                     <h3 style="font-size: 1.4rem; margin-top: 5px; color: #fff;">교내 캡스톤 디자인 대상</h3>
-                    <p style="color: #777; font-size: 1rem; margin-top: 5px;">졸업 작품 'Bobple' 최우수 수상</p>
+                    <p style="color: #777; font-size: 1rem; margin-top: 5px;">졸업 작품 'Babple' 최우수 수상</p>
                 </div>
 
                 <div class="timeline-item">
@@ -613,6 +681,11 @@
 
     </div>
 
+    <div id="image-modal" class="image-modal">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="modal-img">
+    </div>
+
     <script>
         function showContent(id, element) {
             // 1. 모든 메뉴 active 제거
@@ -643,6 +716,41 @@
                 targetContent.scrollIntoView({ behavior: 'smooth' });
             }
         }
+
+        // === [NEW] 이미지 확대 모달 스크립트 ===
+        const modal = document.getElementById('image-modal');
+        const modalImg = document.getElementById('modal-img');
+        const closeModal = document.querySelector('.close-modal');
+
+        // 모든 프로젝트 이미지에 클릭 이벤트 추가
+        document.querySelectorAll('.project-img').forEach(img => {
+            img.addEventListener('click', function() {
+                modal.style.display = "flex";
+                // 약간의 딜레이를 주어 애니메이션 효과 적용
+                setTimeout(() => {
+                    modal.classList.add('show');
+                }, 10);
+                modalImg.src = this.src;
+            });
+        });
+
+        // 닫기 버튼 클릭 시
+        closeModal.addEventListener('click', function() {
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = "none";
+            }, 300); // transition 시간과 맞춤
+        });
+
+        // 배경 클릭 시 닫기
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.classList.remove('show');
+                setTimeout(() => {
+                    modal.style.display = "none";
+                }, 300);
+            }
+        });
     </script>
 </body>
 </html>
