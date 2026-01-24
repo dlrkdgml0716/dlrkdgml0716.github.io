@@ -1,4 +1,4 @@
-/* 폰트 불러오기 */
+/* style.css */
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
 
@@ -8,9 +8,7 @@
     --border: #333;
     --text-main: #fff;
     --text-sub: #888;
-    --accent: #3b82f6; /* Vivid Blue */
-    
-    /* 스크롤바 컬러 */
+    --accent: #3b82f6;
     --scroll-track: #0a0a0c;
     --scroll-thumb: #333;
     --scroll-thumb-hover: #555;
@@ -22,17 +20,20 @@
     box-sizing: border-box;
 }
 
-/* [커스텀 스크롤바 디자인] */
+/* 스크롤바 커스텀 */
 ::-webkit-scrollbar {
     width: 6px;
 }
+
 ::-webkit-scrollbar-track {
     background: var(--scroll-track);
 }
+
 ::-webkit-scrollbar-thumb {
     background: var(--scroll-thumb);
     border-radius: 3px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
     background: var(--scroll-thumb-hover);
 }
@@ -42,11 +43,11 @@ body {
     background-color: var(--bg-view);
     color: var(--text-main);
     height: 100vh;
-    overflow: hidden; 
+    overflow: hidden;
     display: flex;
 }
 
-/* === [왼쪽 패널: 컨트롤러] === */
+/* === 왼쪽 패널 (컨트롤러) === */
 .control-pane {
     width: 500px;
     flex-shrink: 0;
@@ -58,10 +59,9 @@ body {
     z-index: 10;
     display: flex;
     flex-direction: column;
-    box-shadow: 10px 0 30px rgba(0,0,0,0.3);
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.3);
 }
 
-/* 헤더 & 프로필 영역 */
 .header {
     margin-bottom: 40px;
     padding-bottom: 30px;
@@ -77,7 +77,7 @@ body {
     margin-bottom: 25px;
     overflow: hidden;
     position: relative;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
 .profile-img {
@@ -109,55 +109,54 @@ body {
     font-size: 0.95rem;
 }
 
-.header-links { 
-    margin-top: 25px; 
-    display: flex; 
-    gap: 20px; 
+.header-links {
+    margin-top: 25px;
+    display: flex;
+    gap: 20px;
     align-items: center;
 }
 
-.header-links a { 
+.header-links a {
     display: flex;
     align-items: center;
     justify-content: center;
-    text-decoration: none; 
+    text-decoration: none;
     border: none;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    opacity: 0.6; 
+    transition: all 0.3s;
+    opacity: 0.6;
     padding: 5px;
     border-radius: 8px;
 }
 
-.header-links a:hover { 
-    opacity: 1; 
-    background: rgba(255, 255, 255, 0.1); 
-    transform: translateY(-3px); 
+.header-links a:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-3px);
 }
 
 .social-icon {
     width: 24px;
     height: 24px;
-    filter: invert(1); /* 일반 아이콘 흰색 반전 */
+    filter: invert(1);
 }
 
-/* 크몽 로고 전용 스타일 */
 .kmong-custom-icon {
     width: 24px;
     height: 24px;
-    background-color: #FFD400; /* 크몽 공식 노란색 */
-    color: #000; /* 글자색 검정 */
+    background-color: #7def4c;
+    color: #000;
     font-family: 'Pretendard', sans-serif;
-    font-weight: 900; /* 아주 굵게 */
+    font-weight: 900;
     font-size: 16px;
-    border-radius: 4px; /* 둥근 모서리 */
+    border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
     line-height: 1;
-    padding-top: 2px; /* 시각적 중앙 정렬 미세 조정 */
+    padding-top: 2px;
 }
 
-/* 네비게이션 그룹 */
+/* === 네비게이션 === */
 .nav-group {
     margin-bottom: 40px;
 }
@@ -172,7 +171,6 @@ body {
     padding-left: 5px;
 }
 
-/* [네비게이션 아이템: 버튼 스타일] */
 .nav-item {
     display: block;
     padding: 22px;
@@ -181,28 +179,25 @@ body {
     border: 1px solid #333;
     border-radius: 12px;
     cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: all 0.2s;
     position: relative;
 }
 
-/* Hover */
 .nav-item:hover {
     border-color: #666;
     background: #161616;
     transform: translateX(2px);
 }
 
-/* [Active 상태] */
 .nav-item.active {
     background: #000;
     border-color: var(--accent);
     box-shadow: -4px 4px 0 var(--accent);
-    transform: translate(4px, -4px); 
+    transform: translate(4px, -4px);
 }
 
-/* Active 화살표 인디케이터 */
 .nav-item.active::before {
-    content: "▶"; 
+    content: "▶";
     position: absolute;
     left: -25px;
     top: 50%;
@@ -233,56 +228,51 @@ body {
     color: var(--accent);
 }
 
-
-/* === [오른쪽 패널: 뷰어] === */
+/* === 오른쪽 패널 (뷰어) === */
 .view-pane {
     flex-grow: 1;
     height: 100%;
     background-color: var(--bg-view);
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    /* 배경 격자 패턴 */
-    background-image: 
-        linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+    display: block;
+    overflow-y: auto;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
     background-size: 50px 50px;
 }
 
-/* 비네팅 효과 */
-.view-pane::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at center, transparent 30%, #000 100%);
-    pointer-events: none;
+/* 콘텐츠 로더 컨테이너 */
+#app-container {
+    width: 100%;
+    min-height: 100%;
+    position: relative;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-/* 콘텐츠 영역 */
+/* 개별 페이지 래퍼 */
 .content-display {
     width: 100%;
-    height: 100%;
     padding: 80px 100px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    visibility: hidden; /* 기본적으로 숨김 */
-    transform: translateY(10px);
-    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-    overflow-y: auto;
-    z-index: 1; 
-}
-
-.content-display.active {
+    position: relative;
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+    transform: none;
+    animation: fadeIn 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-/* 뷰어 내부 타이포그래피 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* === 콘텐츠 내부 요소 디자인 === */
 .tag-badge {
     display: inline-block;
     padding: 6px 12px;
@@ -292,7 +282,7 @@ body {
     font-size: 0.75rem;
     font-family: 'Space Mono', monospace;
     margin-bottom: 25px;
-    background: rgba(59,130,246,0.1);
+    background: rgba(59, 130, 246, 0.1);
 }
 
 .display-title {
@@ -301,7 +291,7 @@ body {
     line-height: 1.1;
     margin-bottom: 30px;
     letter-spacing: -1px;
-    text-shadow: 0 0 20px rgba(0,0,0,0.5);
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
 .code-block {
@@ -314,7 +304,7 @@ body {
     color: #ccc;
     margin-bottom: 40px;
     position: relative;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
 
 .code-block::before {
@@ -375,57 +365,39 @@ body {
 .btn-link:hover {
     background: var(--accent);
     color: white;
-    box-shadow: 0 5px 15px rgba(59,130,246,0.4);
+    box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
 }
 
-/* 초기 안내 메시지 */
-#placeholder-view {
-    text-align: center;
-    color: #444;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-}
-
-#placeholder-view h2 {
-    font-size: 1.5rem;
-    color: #555;
-    margin-bottom: 10px;
-}
-
-/* Tech Stack Grid 스타일 */
+/* 기술 스택 그리드 */
 .tech-grid {
     padding-top: 30px;
-    display: grid; 
-    grid-template-columns: repeat(2, 1fr); /* 2열 고정 */
-    gap: 60px 80px; /* 세로 30px, 가로 40px 간격 */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 60px 80px;
 }
 
 .tech-category-title {
-    color: var(--accent); 
-    margin-bottom: 15px; 
-    font-size: 1rem; 
+    color: var(--accent);
+    margin-bottom: 15px;
+    font-size: 1rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    border-bottom: 1px solid #333; 
+    border-bottom: 1px solid #333;
     padding-bottom: 8px;
 }
 
 .tech-list {
     display: flex;
-    flex-wrap: wrap; /* 가로로 나열하다 넘치면 줄바꿈 */
+    flex-wrap: wrap;
     gap: 10px;
 }
 
 .tech-item {
-    display: flex; 
-    align-items: center; 
-    gap: 8px; 
-    background: rgba(255,255,255,0.03);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.03);
     border: 1px solid #333;
     padding: 8px 12px;
     border-radius: 8px;
@@ -434,10 +406,10 @@ body {
     transition: all 0.2s;
 }
 
-.tech-item:hover { 
-    background: rgba(59, 130, 246, 0.1); 
-    border-color: var(--accent); 
-    color: #fff; 
+.tech-item:hover {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: var(--accent);
+    color: #fff;
     transform: translateY(-2px);
 }
 
@@ -447,10 +419,10 @@ body {
     object-fit: contain;
 }
 
-/* [추가됨] 타임라인 포인트 스타일 */
+/* 타임라인 */
 .timeline-item {
     margin-bottom: 40px;
-    position: relative; /* 점 위치 기준 */
+    position: relative;
 }
 
 .timeline-item::after {
@@ -460,12 +432,12 @@ body {
     height: 10px;
     background-color: var(--accent);
     border-radius: 50%;
-    left: -36px; /* 왼쪽 패딩 30px + 선 두께 고려하여 위치 조정 */
-    top: 7px; /* 텍스트 높이에 맞춰 조정 */
-    box-shadow: 0 0 0 4px var(--bg-view); /* 점 주변에 배경색 테두리를 줘서 선이 끊긴 느낌 */
+    left: -36px;
+    top: 7px;
+    box-shadow: 0 0 0 4px var(--bg-view);
 }
 
-/* === [NEW] 프로젝트 이미지 갤러리 스타일 === */
+/* 프로젝트 갤러리 */
 .project-gallery {
     display: flex;
     gap: 20px;
@@ -483,64 +455,17 @@ body {
     border: 1px solid #333;
     transition: all 0.3s ease;
     filter: brightness(0.8);
-    cursor: zoom-in; /* [NEW] 확대 가능 커서 표시 */
+    cursor: zoom-in;
 }
 
 .project-img:hover {
     filter: brightness(1);
     border-color: var(--accent);
     transform: scale(1.02);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
-/* === [NEW] 이미지 확대 모달(Lightbox) 스타일 === */
-.image-modal {
-    display: none; /* 기본 숨김 */
-    position: fixed;
-    z-index: 9999;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.9);
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    backdrop-filter: blur(5px);
-}
-
-.image-modal.show {
-    opacity: 1;
-}
-
-.image-modal img {
-    max-width: 90%;
-    max-height: 90%;
-    border-radius: 8px;
-    box-shadow: 0 0 50px rgba(0,0,0,0.8);
-    transform: scale(0.9);
-    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.image-modal.show img {
-    transform: scale(1);
-}
-
-.close-modal {
-    position: absolute;
-    top: 30px;
-    right: 40px;
-    color: #fff;
-    font-size: 40px;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 10000;
-}
-
-/* === [NEW] About Me 확장 스타일 === */
-
-/* 이력서 다운로드 버튼 */
+/* About Me 추가 스타일 */
 .resume-btn-area {
     margin-top: 10px;
     margin-bottom: 30px;
@@ -566,13 +491,11 @@ body {
     box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
 }
 
-/* 섹션 구분 */
 .section-divider {
     border-top: 1px solid #222;
     margin: 40px 0;
 }
 
-/* About Intro */
 .about-intro {
     margin-bottom: 40px;
     border-bottom: 1px solid #333;
@@ -595,31 +518,6 @@ body {
     word-break: keep-all;
 }
 
-.about-keywords {
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
-    margin-bottom: 30px;
-}
-
-.keyword-chip {
-    background: #1a1a1a;
-    padding: 8px 16px;
-    border-radius: 20px;
-    border: 1px solid #333;
-    color: #fff;
-    font-size: 0.9rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.keyword-chip span {
-    color: var(--accent);
-}
-
-/* Info Grid (학력, 경험 등) */
 .info-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -659,14 +557,59 @@ body {
     font-family: 'Space Mono', monospace;
 }
 
-/* 반응형 */
+/* 모달 스타일 */
+.image-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.image-modal.show {
+    opacity: 1;
+}
+
+.image-modal img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 8px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+    transform: scale(0.9);
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.image-modal.show img {
+    transform: scale(1);
+}
+
+.close-modal {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10000;
+}
+
+/* 모바일 반응형 */
 @media (max-width: 1000px) {
     body {
         flex-direction: column;
         height: auto;
         overflow: auto;
     }
-    
+
     .control-pane {
         width: 100%;
         height: auto;
@@ -674,68 +617,37 @@ body {
         border-bottom: 1px solid var(--border);
         padding: 40px 20px;
     }
-    
+
     .view-pane {
         width: 100%;
         height: auto;
         display: block;
         padding: 0;
     }
-    
-    .nav-item.active::before {
-        content: "▼";
-        left: auto;
-        right: 20px;
-        transform: none;
-        top: 15px;
-        color: var(--accent);
-    }
-    
-    .nav-item.active {
-        transform: none;
-        box-shadow: 0 4px 0 var(--accent);
-    } 
-    
+
     .content-display {
-        position: relative;
-        opacity: 1;
-        visibility: visible;
-        transform: none;
         padding: 40px 20px;
-        display: none;
-        height: auto;
     }
-    
-    .content-display.active {
-        display: block;
-        border-top: 1px solid #222;
-    }
-    
-    #placeholder-view {
-        display: none;
-    }
-    
+
     .display-title {
         font-size: 2.2rem;
     }
-    
+
     .tech-grid {
         grid-template-columns: 1fr;
         gap: 40px;
     }
-    
-    /* 모바일 갤러리 조정 */
+
     .project-img {
         width: 100%;
         height: auto;
         aspect-ratio: 16/9;
     }
-    
+
     .project-gallery {
         flex-direction: column;
     }
-    
-    /* 모바일 Info Grid */
+
     .info-grid {
         grid-template-columns: 1fr;
         gap: 30px;
