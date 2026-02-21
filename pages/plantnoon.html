@@ -1,13 +1,13 @@
 <div class="content-display active" style="display:block;">
-    <span class="tag-badge">Serverless Web App</span>
+    <span class="tag-badge">Serverless Web App (Team Project)</span>
     <h2 class="display-title">오후의 식물 (Plantnoon)</h2>
-    <div class="desc-text">
-        식집사를 위한 <strong>AI 진단 및 토탈 관리 플랫폼</strong>입니다.<br>
-        별도의 백엔드 서버 구축 없이 <strong>Firebase Serverless 아키텍처</strong>를 활용하여 사용자 인증, 데이터베이스, 파일 저장소 기능을 구현했습니다.
+    <div class="desc-text" style="color: #ccc; font-size: 1.05rem;">
+        식집사를 위한 <strong style="color:#fff;">AI 진단 및 토탈 관리 플랫폼</strong>입니다.<br>
+        별도의 백엔드 서버 구축 없이 <strong style="color:#fff;">Firebase Serverless 아키텍처</strong>를 활용하여 사용자 인증, 데이터베이스, 파일 저장소 기능을 구현했습니다.
     </div>
-    <div class="code-block">
-        Tech: JavaScript, Firebase(Firestore, Auth, Storage), PortOne, Gemini API<br>
-        Type: Serverless Architecture, SPA
+    <div class="code-block" style="background: #111; border-color: #333; color: #ddd;">
+        <strong style="color:#fff;">Tech:</strong> JavaScript, Firebase(Firestore, Auth, Storage), PortOne, Gemini API<br>
+        <strong style="color:#fff;">Type:</strong> Serverless Architecture, MPA
     </div>
     <div class="project-gallery">
         <img src="plantnoon/1.png" class="project-img" alt="1">
@@ -16,11 +16,73 @@
         <img src="plantnoon/4.png" class="project-img" alt="4">
         <img src="plantnoon/5.png" class="project-img" alt="5">
     </div>
-    <ul class="desc-list">
-        <li><strong>Serverless 아키텍처:</strong> Firebase Authentication, Firestore NoSQL DB 설계</li>
-        <li><strong>결제 프로세스 구현:</strong> PortOne SDK 연동 및 구독(Pro) 등급 권한 관리</li>
-        <li><strong>AI 서비스 연동:</strong> Google Gemini API를 활용한 식물 진단 챗봇</li>
-        <li><strong>비동기 데이터 처리:</strong> Fetch API 및 Async/Await을 활용한 SPA 환경 구축</li>
-    </ul>
-    <a href="#" class="btn-link">View Code</a>
+
+    <h3 style="margin: 60px 0 30px 0; color: var(--accent); font-size: 1.35rem; font-weight: 800; letter-spacing: 1px; border-bottom: 1px solid #222; padding-bottom: 12px;">
+        OVERALL FEATURES & SYSTEM LOGIC
+    </h3>
+    
+    <div class="tech-grid" style="margin-bottom: 50px; gap: 40px;">
+        <div class="tech-category">
+            <h4 style="color: #ffffff; font-size: 1.15rem; font-weight: 700; margin-bottom: 6px;">Plant Care & Data</h4>
+            <p style="color: #aaa; font-size: 0.85rem; margin-bottom: 15px; font-family: 'Space Mono', monospace;">관리 알고리즘 및 시각화</p>
+            <ul class="desc-list" style="font-size: 0.95rem; line-height: 1.7; color: #ddd;">
+                <li>180일 기준 동적 케어 스케줄러 알고리즘</li>
+                <li>Chart.js 연동 실시간 성장 기록 시스템</li>
+            </ul>
+        </div>
+        <div class="tech-category">
+            <h4 style="color: #ffffff; font-size: 1.15rem; font-weight: 700; margin-bottom: 6px;">Community & AI</h4>
+            <p style="color: #aaa; font-size: 0.85rem; margin-bottom: 15px; font-family: 'Space Mono', monospace;">사용자 인터랙션 및 지능형 상담</p>
+            <ul class="desc-list" style="font-size: 0.95rem; line-height: 1.7; color: #ddd;">
+                <li>Gemini API 활용 AI 식물 질병 진단 서비스</li>
+                <li>Intersection Observer 기반 무한 스크롤 피드</li>
+            </ul>
+        </div>
+    </div>
+    
+    <h3 style="margin: 60px 0 25px 0; color: var(--accent); font-size: 1.35rem; font-weight: 800; letter-spacing: 1px; border-bottom: 1px solid #222; padding-bottom: 12px;">
+        MY ROLE & KEY CONTRIBUTIONS
+    </h3>
+    
+    <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid #333; border-radius: 12px; padding: 30px; margin-bottom: 60px;">
+        <ul class="desc-list" style="font-size: 0.95rem; line-height: 1.8; color: #ccc; margin-bottom: 0;">
+            <li style="margin-bottom: 18px;"><strong style="color:#fff; font-size:1rem;">Frontend UI/UX:</strong> 프로젝트 전체의 반응형 웹 UI 설계 및 CSS 퍼블리싱 담당, Vanilla JS를 활용한 비동기 데이터 통신 및 DOM 제어 구현</li>
+            <li style="margin-bottom: 18px;"><strong style="color:#fff; font-size:1rem;">Business Logic:</strong> PortOne SDK를 활용한 구독 결제 시스템 연동, <code>onAuthStateChanged</code> 기반 사용자 등급(Pro/Free)에 따른 서비스 권한 제어 로직 전담 개발</li>
+            <li><strong style="color:#fff; font-size:1rem;">Firebase DB 최적화:</strong> 커뮤니티 및 사용자 데이터의 NoSQL 구조 설계, 데이터 읽기 비용 절감을 위한 비정규화(Denormalization) 직접 적용</li>
+        </ul>
+    </div>
+
+    <h3 style="margin: 60px 0 25px 0; color: var(--accent); font-size: 1.35rem; font-weight: 800; letter-spacing: 2px; border-bottom: 1px solid #222; padding-bottom: 12px;">
+        DEEP DIVE: TECHNICAL PROBLEM SOLVING
+    </h3>
+    
+    <div class="tech-deep-dive" style="display: flex; flex-direction: column; gap: 20px;">
+        
+        <div style="background: #0f1218; border-left: 4px solid var(--accent); border-radius: 8px; padding: 25px 30px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <h4 style="color:var(--accent); font-size: 1.1rem; margin:0;">Case 01. 유연한 구독 모델과 권한 제어</h4>
+                <span style="color: #888; font-size: 0.8rem; font-family: 'Space Mono', monospace;">Authority Logic</span>
+            </div>
+            <p class="desc-text" style="font-size: 0.95rem; line-height: 1.7; color: #bbb; margin: 0;">
+                <strong style="color:#fff;">[Problem]</strong> 구독 취소 즉시 권한을 회수하면 결제한 기간만큼의 서비스 이용 권리가 침해되는 UX 문제 발생<br>
+                <strong style="color:#fff;">[Solution]</strong> '취소 예약' 상태인 <code>cancelAtPeriodEnd</code> 플래그와 <code>subscriptionExpiresAt</code> 타임스탬프를 조합하여 로직 설계<br>
+                <strong style="color:#fff;">[Result]</strong> 로그인 시 만료 시간과 현재 서버 시간을 대조하여, 기간이 종료된 시점에만 등급을 자동 강등시키는 견고한 권한 시스템 구축
+            </p>
+        </div>
+
+        <div style="background: #101410; border-left: 4px solid #6B7B61; border-radius: 8px; padding: 25px 30px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <h4 style="color:#8ca57c; font-size: 1.1rem; margin:0;">Case 02. NoSQL 데이터 구조 선제적 설계</h4>
+                <span style="color: #888; font-size: 0.8rem; font-family: 'Space Mono', monospace;">Architecture Design</span>
+            </div>
+            <p class="desc-text" style="font-size: 0.95rem; line-height: 1.7; color: #bbb; margin: 0;">
+                <strong style="color:#fff;">[Foresight]</strong> 초기 설계 단계에서 커뮤니티 피드 조회 시 발생하는 N+1 쿼리로 인한 Firebase 데이터 읽기(Read) 비용 증가와 네트워크 병목 현상 발생을 예측<br>
+                <strong style="color:#fff;">[Action]</strong> Firebase Firestore의 과금 기준(읽기 횟수)과 NoSQL의 구조적 특성을 고려하여 기획 단계부터 비정규화(Denormalization) 기반의 데이터 모델을 설계함. <code>likesCount</code>와 <code>commentsCount</code> 등의 필드를 게시글 상위 문서에 병합 적용<br>
+                <strong style="color:#fff;">[Outcome]</strong> 런칭 시점부터 추가 쿼리 없이 단 1회의 읽기만으로 게시글 렌더링을 구현하여 논리적 계산 기준 <strong style="color:#8ca57c;">데이터 읽기(Read) 요청을 약 70~80% 절감하는 구조</strong>를 완성하고 클라이언트 로딩 속도를 유의미하게 개선
+            </p>
+        </div>
+
+    </div>
+    
+    <a href="#" class="btn-link" style="margin-top: 50px;">View Code</a>
 </div>
