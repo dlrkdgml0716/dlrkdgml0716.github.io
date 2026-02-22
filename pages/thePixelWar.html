@@ -1,26 +1,189 @@
 <div class="content-display active" style="display:block;">
-    <span class="tag-badge">Featured Project</span>
-    <h2 class="display-title">The Pixel War</h2>
-    <div class="desc-text">
-        수천 명의 유저가 2000x2000 픽셀 캔버스에 동시에 그림을 그리는 상황을 가정한 대규모 트래픽 처리 프로젝트입니다.
-        단일 데이터베이스의 한계를 극복하고 실시간성을 보장하기 위해 마이크로서비스 아키텍처를 설계했습니다.
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 15px;">
+        <div>
+            <span class="tag-badge">Featured Project</span>
+            <h2 class="display-title" style="margin: 8px 0 0 0;">The Pixel War</h2>
+        </div>
+        <a href="https://github.com/dlrkdgml0716" target="_blank" class="btn-link" style="margin: 0; white-space: nowrap;">View Repository</a>
     </div>
-    <div class="code-block">
-        backend/<br>
-        ├── msa-auth-server (JWT)<br>
-        ├── msa-socket-server (Netty)<br>
-        ├── infra-kafka (Event Broker)<br>
-        └── infra-redis (Distributed Lock)
+    
+    <div class="desc-text" style="margin-bottom: 25px;">
+        수천 명의 유저가 실제 지도 좌표를 기반으로 한 무한한 캔버스에 동시에 픽셀 아트를 그리는 상황을 가정한 대규모 트래픽 처리 프로젝트입니다.
+        모놀리식(Monolithic) 아키텍처에서 발생하는 데이터베이스 병목과 동시성 문제를 극복하기 위해 Redis, Kafka 등 다양한 인프라 기술을 접목하여 실시간 분산 처리 시스템을 구축했습니다.
     </div>
-    <div class="project-gallery">
-        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80" class="project-img" alt="Architecture Diagram">
-        <img src="https://images.unsplash.com/photo-1558494949-ef526b0042a0?auto=format&fit=crop&w=800&q=80" class="project-img" alt="Server Dashboard">
-        <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=800&q=80" class="project-img" alt="Code Screenshot">
+    
+    <div class="code-block" style="font-family: monospace; line-height: 1.7; margin-bottom: 30px;">
+        <strong>[Application Modules]</strong><br>
+        • Auth & User&nbsp;&nbsp;&nbsp;: Spring Security, Kakao OAuth2<br>
+        • Pixel Canvas&nbsp;&nbsp;: Redis + Kafka 활용 비즈니스 로직 및 히트맵 처리<br>
+        • Chat & Guild&nbsp;&nbsp;: WebSocket 기반 실시간 소통 및 도안 관리<br>
+        <br>
+        <strong>[Infrastructure & Data]</strong><br>
+        • Message Queue : Kafka (비동기 Write-Back 패턴)<br>
+        • Cache & Lock&nbsp;&nbsp;: Redis (분산 락을 통한 동시성 제어)<br>
+        • Database&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: MySQL, Spring Data JPA<br>
+        • Storage&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: AWS S3 (정적 리소스 관리)<br>
+        <br>
+        <strong>[Deployment & Cloud]</strong><br>
+        • Cloud Hosting : AWS EC2 (서버 인프라 구축)<br>
+        • Container&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Docker, Docker Compose (통합 환경 구축)
     </div>
-    <ul class="desc-list">
-        <li><strong>동시성 제어:</strong> Redisson Pub/Sub 분산 락을 사용하여 데이터 정합성 보장</li>
-        <li><strong>성능 최적화:</strong> Kafka를 이용한 비동기 Write-Back 패턴으로 DB 부하 감소</li>
-        <li><strong>확장성:</strong> 기능별 모듈 분리(MSA) 및 Docker Compose 기반 환경 구축</li>
-    </ul>
-    <a href="https://github.com/dlrkdgml0716" target="_blank" class="btn-link">View Repository</a>
+    
+    <div class="project-gallery" style="margin-bottom: 50px;">
+        <img src="thepixelwar/1.png" class="project-img" alt="1">
+        <img src="thepixelwar/2.png" class="project-img" alt="2">
+        <img src="thepixelwar/3.png" class="project-img" alt="3">
+        <img src="thepixelwar/4.png" class="project-img" alt="4">
+    </div>
+
+    <div style="margin-bottom: 50px;">
+        <h3 style="color: #64ffda; font-size: 1.2em; margin-top: 0; margin-bottom: 20px; border-bottom: 2px solid rgba(100, 255, 218, 0.2); padding-bottom: 10px; display: inline-block;">System Architecture</h3>
+        <img src="thepixelwar/architecture.png" class="project-img" alt="시스템 아키텍처 다이어그램" style="width: 100%; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); background: #112240; padding: 10px;">
+    </div>
+
+    <div style="margin-bottom: 50px;">
+        <h3 style="color: #64ffda; font-size: 1.2em; margin-top: 0; margin-bottom: 20px; border-bottom: 2px solid rgba(100, 255, 218, 0.2); padding-bottom: 10px; display: inline-block;">Key Features</h3>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+            
+            <div style="background-color: rgba(255, 255, 255, 0.03); padding: 20px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.05); display: flex; flex-direction: column;">
+                <div style="font-size: 1.5em; margin-bottom: 10px;">🗺️</div>
+                <h4 style="color: #e6f1ff; margin: 0 0 10px 0; font-size: 1.05em;">공간 데이터 쿼리 최적화</h4>
+                <p style="color: #8892b0; font-size: 0.9em; line-height: 1.6; margin: 0;">전체 데이터 대신 현재 화면의 위/경도 영역(Bounds) 좌표를 계산하여 해당하는 픽셀만 조회하도록 쿼리를 최적화했습니다.</p>
+                
+                <div style="background-color: #0a192f; border-radius: 6px; margin-top: 15px; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; flex-grow: 1; display: flex; flex-direction: column;">
+                    <div style="background-color: rgba(255,255,255,0.05); padding: 6px 10px; display: flex; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                        <span style="width: 10px; height: 10px; background-color: #ff5f56; border-radius: 50%; margin-right: 6px;"></span>
+                        <span style="width: 10px; height: 10px; background-color: #ffbd2e; border-radius: 50%; margin-right: 6px;"></span>
+                        <span style="width: 10px; height: 10px; background-color: #27c93f; border-radius: 50%; margin-right: 10px;"></span>
+                        <span style="color: #8892b0; font-size: 0.75em; font-family: sans-serif;">Core Logic</span>
+                    </div>
+                    <div style="padding: 12px; overflow-x: auto; font-family: monospace; font-size: 0.8em;">
+<pre style="margin: 0; color: #e6f1ff;"><code>public List&lt;PixelRequest&gt; getPixelsInBounds(...) {
+    int minX = (int) Math.floor(minLat / GRID_SIZE);
+    int maxX = (int) Math.ceil(maxLat / GRID_SIZE);
+    return pixelRepository.findByArea(minX, maxX, minY, maxY);
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="background-color: rgba(255, 255, 255, 0.03); padding: 20px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.05); display: flex; flex-direction: column;">
+                <div style="font-size: 1.5em; margin-bottom: 10px;">🔥</div>
+                <h4 style="color: #e6f1ff; margin: 0 0 10px 0; font-size: 1.05em;">실시간 랭킹 & 히트맵</h4>
+                <p style="color: #8892b0; font-size: 0.9em; line-height: 1.6; margin: 0;">Redis ZSet의 정렬 기능을 활용하여 실시간 유저 랭킹 및 특정 시간대 핫 픽셀(히트맵) 데이터를 빠르게 추출합니다.</p>
+                
+                <div style="background-color: #0a192f; border-radius: 6px; margin-top: 15px; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; flex-grow: 1; display: flex; flex-direction: column;">
+                    <div style="background-color: rgba(255,255,255,0.05); padding: 6px 10px; display: flex; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                        <span style="width: 10px; height: 10px; background-color: #ff5f56; border-radius: 50%; margin-right: 6px;"></span>
+                        <span style="width: 10px; height: 10px; background-color: #ffbd2e; border-radius: 50%; margin-right: 6px;"></span>
+                        <span style="width: 10px; height: 10px; background-color: #27c93f; border-radius: 50%; margin-right: 10px;"></span>
+                        <span style="color: #8892b0; font-size: 0.75em; font-family: sans-serif;">Core Logic</span>
+                    </div>
+                    <div style="padding: 12px; overflow-x: auto; font-family: monospace; font-size: 0.8em;">
+<pre style="margin: 0; color: #e6f1ff;"><code>String heatmapKey = "heatmap:" + timeFormatter;
+redisTemplate.opsForZSet().incrementScore(
+    heatmapKey, member, 1
+);
+redisTemplate.expire(heatmapKey, 2, TimeUnit.HOURS);</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background-color: rgba(255, 255, 255, 0.03); padding: 20px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.05); display: flex; flex-direction: column;">
+                <div style="font-size: 1.5em; margin-bottom: 10px;">💬</div>
+                <h4 style="color: #e6f1ff; margin: 0 0 10px 0; font-size: 1.05em;">STOMP 기반 실시간 소통</h4>
+                <p style="color: #8892b0; font-size: 0.9em; line-height: 1.6; margin: 0;">WebSocket과 STOMP를 활용하여 다수의 유저가 실시간으로 소통할 수 있는 채팅 환경을 구축했습니다.</p>
+                
+                <div style="background-color: #0a192f; border-radius: 6px; margin-top: 15px; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; flex-grow: 1; display: flex; flex-direction: column;">
+                    <div style="background-color: rgba(255,255,255,0.05); padding: 6px 10px; display: flex; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                        <span style="width: 10px; height: 10px; background-color: #ff5f56; border-radius: 50%; margin-right: 6px;"></span>
+                        <span style="width: 10px; height: 10px; background-color: #ffbd2e; border-radius: 50%; margin-right: 6px;"></span>
+                        <span style="width: 10px; height: 10px; background-color: #27c93f; border-radius: 50%; margin-right: 10px;"></span>
+                        <span style="color: #8892b0; font-size: 0.75em; font-family: sans-serif;">Core Logic</span>
+                    </div>
+                    <div style="padding: 12px; overflow-x: auto; font-family: monospace; font-size: 0.8em;">
+<pre style="margin: 0; color: #e6f1ff;"><code>@MessageMapping("/chat/message")
+public void message(ChatMessage message) {
+    messagingTemplate.convertAndSend(
+        "/sub/chat/room/" + message.getRoomId(), message
+    );
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background-color: rgba(255, 255, 255, 0.03); padding: 20px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.05); display: flex; flex-direction: column;">
+                <div style="font-size: 1.5em; margin-bottom: 10px;">🎨</div>
+                <h4 style="color: #e6f1ff; margin: 0 0 10px 0; font-size: 1.05em;">S3 연동 길드 도안 시스템</h4>
+                <p style="color: #8892b0; font-size: 0.9em; line-height: 1.6; margin: 0;">AWS S3를 연동하여 길드원들이 단합하여 그림을 그릴 수 있도록 청사진(도안) 오버레이 기능을 제공합니다.</p>
+                
+                <div style="background-color: #0a192f; border-radius: 6px; margin-top: 15px; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; flex-grow: 1; display: flex; flex-direction: column;">
+                    <div style="background-color: rgba(255,255,255,0.05); padding: 6px 10px; display: flex; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                        <span style="width: 10px; height: 10px; background-color: #ff5f56; border-radius: 50%; margin-right: 6px;"></span>
+                        <span style="width: 10px; height: 10px; background-color: #ffbd2e; border-radius: 50%; margin-right: 6px;"></span>
+                        <span style="width: 10px; height: 10px; background-color: #27c93f; border-radius: 50%; margin-right: 10px;"></span>
+                        <span style="color: #8892b0; font-size: 0.75em; font-family: sans-serif;">Core Logic</span>
+                    </div>
+                    <div style="padding: 12px; overflow-x: auto; font-family: monospace; font-size: 0.8em;">
+<pre style="margin: 0; color: #e6f1ff;"><code>String s3Url = s3UploadService.uploadBlueprint(file);
+String finalUrl = s3Url + "?scale=" + Math.round(scale);
+guildService.updateBlueprint(
+    principal.getName(), finalUrl, lat, lng
+);</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <div>
+        <h3 style="color: #ff6b6b; font-size: 1.2em; margin-top: 0; margin-bottom: 20px; border-bottom: 2px solid rgba(255, 107, 107, 0.2); padding-bottom: 10px; display: inline-block;">Trouble Shooting</h3>
+        
+        <div style="display: flex; flex-wrap: wrap; background-color: rgba(255, 107, 107, 0.04); border-left: 4px solid #ff6b6b; border-radius: 0 10px 10px 0; padding: 25px; margin-bottom: 20px;">
+            
+            <div style="flex: 1; min-width: 200px; padding-right: 20px; margin-bottom: 15px;">
+                <span style="display: inline-block; background-color: rgba(255, 107, 107, 0.15); color: #ff6b6b; padding: 4px 10px; border-radius: 6px; font-size: 0.8em; font-weight: bold; margin-bottom: 12px; letter-spacing: 0.5px;">ISSUE 01</span>
+                <h4 style="color: #e6f1ff; margin: 0; font-size: 1.1em; line-height: 1.4;">대규모 트래픽으로 인한<br>DB 데드락 및 병목 현상</h4>
+            </div>
+            
+            <div style="flex: 2; min-width: 300px; border-left: 1px solid rgba(255, 255, 255, 0.08); padding-left: 25px;">
+                <div style="margin-bottom: 15px;">
+                    <strong style="color: #ff8787; font-size: 0.95em;">🤔 Problem:</strong>
+                    <p style="color: #8892b0; font-size: 0.9em; line-height: 1.6; margin: 5px 0 0 0;">수많은 유저가 동일한 픽셀 좌표를 동시에 클릭할 때 동시성 문제가 발생하고, DB에 직접 쓰기(Write) 요청이 몰려 심각한 부하가 발생했습니다.</p>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <strong style="color: #64ffda; font-size: 0.95em;">💡 Solution:</strong>
+                    <p style="color: #8892b0; font-size: 0.9em; line-height: 1.6; margin: 5px 0 0 0;"><strong>Redisson 기반 분산 락</strong>을 적용하여 동시성을 안전하게 제어하고, 즉시 DB에 저장하는 대신 <strong>Kafka를 이용한 비동기 Write-Back 패턴</strong>을 도입하여 부하를 낮추었습니다. 분산 락 획득 실패 시 예외 처리를 통해 대기열 병목을 방지했습니다.</p>
+                </div>
+                
+                <div style="background-color: #0a192f; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1); overflow: hidden;">
+                    <div style="background-color: rgba(255,255,255,0.05); padding: 6px 10px; display: flex; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                        <span style="width: 10px; height: 10px; background-color: #ff5f56; border-radius: 50%; margin-right: 6px;"></span>
+                        <span style="width: 10px; height: 10px; background-color: #ffbd2e; border-radius: 50%; margin-right: 6px;"></span>
+                        <span style="width: 10px; height: 10px; background-color: #27c93f; border-radius: 50%; margin-right: 10px;"></span>
+                        <span style="color: #8892b0; font-size: 0.75em; font-family: sans-serif;">Distributed Lock & Kafka Event</span>
+                    </div>
+                    <div style="padding: 12px; overflow: auto; max-height: 200px; font-family: monospace; font-size: 0.8em;">
+<pre style="margin: 0; color: #e6f1ff;"><code>String lockKey = "pixel:lock:" + x + ":" + y;
+RLock lock = redissonClient.getLock(lockKey);
+
+if (lock.tryLock(5, 2, TimeUnit.SECONDS)) {
+    try {
+        redisTemplate.opsForValue().set(pixelKey, snappedRequest.color());
+        String message = objectMapper.writeValueAsString(snappedRequest);
+        kafkaTemplate.send("pixel-updates", message);
+    } finally {
+        if (lock.isHeldByCurrentThread()) lock.unlock();
+    }
+} else {
+    return "다른 사람이 작업 중입니다.";
+}</code></pre>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>

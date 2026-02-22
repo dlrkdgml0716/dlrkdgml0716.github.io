@@ -25,7 +25,7 @@
     </h3>
 
     <div style="margin-bottom: 40px; text-align: center;">
-        <img src="plantnoon/6.png" style="width: 100%; border-radius: 12px; border: 1px solid #333;" alt="System Architecture">
+        <img src="plantnoon/6.png" class="project-img" style="width: 100%; height: auto; object-fit: contain; border-radius: 12px; border: 1px solid #333;" alt="System Architecture">
         <p style="color: #666; font-size: 0.85rem; margin-top: 10px;">[System Architecture: 클라이언트-서버리스 인프라 간 데이터 흐름도]</p>
     </div>
     
@@ -81,7 +81,7 @@
                 <strong style="color:#fff;">[Action]</strong> NoSQL의 구조적 특성을 활용하여 기획 단계부터 <strong style="color:#fff;">비정규화(Denormalization) 모델</strong>을 채택. <code>likesCount</code>, <code>commentsCount</code>, <code>authorName</code> 등의 빈번한 조회 데이터를 상위 문서에 병합하여 단 1회의 쿼리로 렌더링이 가능하도록 설계
             </p>
             <div style="text-align: center;">
-                <img src="plantnoon/7.png" style="width: 100%; max-width: 600px; border-radius: 8px; filter: grayscale(0.2);" alt="DB ERD">
+                <img src="plantnoon/7.png" class="project-img" style="width: 100%; max-width: 600px; height: auto; object-fit: contain; border-radius: 8px; filter: grayscale(0.2);" alt="DB ERD">
                 <p style="color: #555; font-size: 0.8rem; margin-top: 8px;">[Firestore NoSQL Data Modeling: 의도적 비정규화 적용]</p>
             </div>
             <p class="desc-text" style="font-size: 0.95rem; line-height: 1.7; color: #bbb; margin-top: 15px;">
@@ -96,37 +96,45 @@
                 <strong style="color:#fff;">[Solution]</strong> <strong style="color:#fff;">Role-Based Access Control(RBAC)</strong>을 Firestore Rules로 구현하여 서버 사이드 수준의 보안 확보. 사용자 UID 검증 및 Custom Function을 활용하여 <strong>데이터 계층별(Nested Collection) 정밀 권한 제어</strong> 적용
             </p>
 
-            <div style="background: #000; padding: 20px; border-radius: 6px; font-family: 'Space Mono', monospace; font-size: 0.85rem; color: #c5c5c5; border: 1px solid #333; line-height: 1.6; overflow-x: auto;">
-                <span style="color: #6a9955;">// 공통 관리자 확인 로직의 함수화</span><br>
-                <span style="color: #569cd6;">function</span> <span style="color: #dcdcaa;">isAdmin</span>() {<br>
-                &nbsp;&nbsp;<span style="color: #c586c0;">return</span> get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin == <span style="color: #569cd6;">true</span>;<br>
-                }<br><br>
+            <div style="background-color: #0a0a0c; border-radius: 8px; border: 1px solid #333; overflow: hidden; margin-top: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.3);">
+                <div style="background-color: #111; padding: 10px 15px; display: flex; align-items: center; border-bottom: 1px solid #222;">
+                    <span style="width: 12px; height: 12px; background-color: #ff5f56; border-radius: 50%; margin-right: 8px;"></span>
+                    <span style="width: 12px; height: 12px; background-color: #ffbd2e; border-radius: 50%; margin-right: 8px;"></span>
+                    <span style="width: 12px; height: 12px; background-color: #27c93f; border-radius: 50%; margin-right: 15px;"></span>
+                    <span style="color: #888; font-size: 0.8em; font-family: 'Space Mono', monospace; font-weight: 700;">firestore.rules</span>
+                </div>
+                <div style="background: #000; padding: 20px; font-family: 'Space Mono', monospace; font-size: 0.85rem; color: #c5c5c5; line-height: 1.6; overflow-x: auto; max-height: 350px;">
+                    <span style="color: #6a9955;">// 공통 관리자 확인 로직의 함수화</span><br>
+                    <span style="color: #569cd6;">function</span> <span style="color: #dcdcaa;">isAdmin</span>() {<br>
+                    &nbsp;&nbsp;<span style="color: #c586c0;">return</span> get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin == <span style="color: #569cd6;">true</span>;<br>
+                    }<br><br>
 
-                <span style="color: #6a9955;">// 리소스 성격에 따른 권한 분리 설계</span><br>
-                match /stories/{postId} {<br>
-                &nbsp;&nbsp;<span style="color: #6a9955;">// 커뮤니티 피드: 읽기는 전체 공개, 쓰기는 인증된 회원만</span><br>
-                &nbsp;&nbsp;<span style="color: #569cd6;">allow read</span>: <span style="color: #c586c0;">if</span> <span style="color: #569cd6;">true</span>;<br>
-                &nbsp;&nbsp;<span style="color: #569cd6;">allow write</span>: <span style="color: #c586c0;">if</span> request.auth != <span style="color: #569cd6;">null</span>;<br>
-                }<br><br>
+                    <span style="color: #6a9955;">// 리소스 성격에 따른 권한 분리 설계</span><br>
+                    match /stories/{postId} {<br>
+                    &nbsp;&nbsp;<span style="color: #6a9955;">// 커뮤니티 피드: 읽기는 전체 공개, 쓰기는 인증된 회원만</span><br>
+                    &nbsp;&nbsp;<span style="color: #569cd6;">allow read</span>: <span style="color: #c586c0;">if</span> <span style="color: #569cd6;">true</span>;<br>
+                    &nbsp;&nbsp;<span style="color: #569cd6;">allow write</span>: <span style="color: #c586c0;">if</span> request.auth != <span style="color: #569cd6;">null</span>;<br>
+                    }<br><br>
 
-                match /users/{userId} {<br>
-                &nbsp;&nbsp;<span style="color: #6a9955;">// 사용자 개인정보: 본인 또는 관리자만 접근 가능</span><br>
-                &nbsp;&nbsp;<span style="color: #569cd6;">allow read</span>: <span style="color: #c586c0;">if</span> isAdmin() || request.auth.uid == userId;<br>
-                &nbsp;&nbsp;<span style="color: #569cd6;">allow write</span>: <span style="color: #c586c0;">if</span> request.auth.uid == userId;<br><br>
+                    match /users/{userId} {<br>
+                    &nbsp;&nbsp;<span style="color: #6a9955;">// 사용자 개인정보: 본인 또는 관리자만 접근 가능</span><br>
+                    &nbsp;&nbsp;<span style="color: #569cd6;">allow read</span>: <span style="color: #c586c0;">if</span> isAdmin() || request.auth.uid == userId;<br>
+                    &nbsp;&nbsp;<span style="color: #569cd6;">allow write</span>: <span style="color: #c586c0;">if</span> request.auth.uid == userId;<br><br>
 
-                &nbsp;&nbsp;<span style="color: #6a9955;">// 하위 서브 컬렉션까지 소유권 검증</span><br>
-                &nbsp;&nbsp;match /plants/{plantId} {<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #569cd6;">allow read, write</span>: <span style="color: #c586c0;">if</span> request.auth != <span style="color: #569cd6;">null</span> && request.auth.uid == userId;<br><br>
+                    &nbsp;&nbsp;<span style="color: #6a9955;">// 하위 서브 컬렉션까지 소유권 검증</span><br>
+                    &nbsp;&nbsp;match /plants/{plantId} {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #569cd6;">allow read, write</span>: <span style="color: #c586c0;">if</span> request.auth != <span style="color: #569cd6;">null</span> && request.auth.uid == userId;<br><br>
 
-                &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #6a9955;">// 식물별 케어 기록 및 성장 일기: 데이터 무결성을 위해 개별 경로 명시</span><br>
-                &nbsp;&nbsp;&nbsp;&nbsp;match /careRecords/{careId} {<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #569cd6;">allow read, write</span>: <span style="color: #c586c0;">if</span> request.auth != <span style="color: #569cd6;">null</span> && request.auth.uid == userId;<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;match /growthDiaries/{diaryId} {<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #569cd6;">allow read, write</span>: <span style="color: #c586c0;">if</span> request.auth != <span style="color: #569cd6;">null</span> && request.auth.uid == userId;<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-                &nbsp;&nbsp;}<br>
-                }<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #6a9955;">// 식물별 케어 기록 및 성장 일기: 데이터 무결성을 위해 개별 경로 명시</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;match /careRecords/{careId} {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #569cd6;">allow read, write</span>: <span style="color: #c586c0;">if</span> request.auth != <span style="color: #569cd6;">null</span> && request.auth.uid == userId;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;match /growthDiaries/{diaryId} {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #569cd6;">allow read, write</span>: <span style="color: #c586c0;">if</span> request.auth != <span style="color: #569cd6;">null</span> && request.auth.uid == userId;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;}<br>
+                    }
+                </div>
             </div>
         </div>
     </div>
