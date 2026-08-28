@@ -11,7 +11,16 @@
     <div class="control-pane">
         <div class="header">
             <div class="profile-box">
-                <img src="myImg.jpg" alt="Profile" class="profile-img">
+                <div class="profile-flip-inner">
+                    <!-- 앞면: 기존 프로필 이미지 -->
+                    <div class="profile-front">
+                        <img src="myImg.jpg" alt="Profile" class="profile-img">
+                    </div>
+                    <!-- 뒷면: 호버 시 보여줄 이미지 (경로를 수정해 줘!) -->
+                    <div class="profile-back">
+                        <img src="hoverImg.jpg" alt="Profile Hover" class="profile-img">
+                    </div>
+                </div>
             </div>
             <h1>이강희</h1>
             <span class="role">Backend Engineer</span>
