@@ -3,13 +3,14 @@
     <h2 class="display-title">오후의 식물 (Plantnoon)</h2>
     
     <div class="desc-text" style="color: #ccc; font-size: 1.05rem;">
-        식집사를 위한 <strong style="color:#fff;">AI 진단 및 토탈 관리 플랫폼</strong>입니다.<br>
-        별도의 백엔드 서버 구축 없이 <strong style="color:#fff;">Firebase Serverless 아키텍처</strong>를 활용하여 사용자 인증, 데이터베이스, 파일 저장소 기능을 구현했습니다.
+        식집사를 위한 <strong style="color:#fff;">AI 진단 및 성장 관리 플랫폼</strong>입니다.<br>
+        별도의 백엔드 서버 구축·운영 없이, <strong style="color:#fff;">Firebase</strong>로 사용자 인증·데이터베이스·파일 저장소를,
+         <strong style="color:#fff;">Vercel Serverless Functions</strong>로 Gemini AI 연동·결제 검증·정기결제를 처리했습니다.
     </div>
 
     <div class="code-block" style="background: #111; border-color: #333; color: #ddd;">
         <strong style="color:#fff;">Tech:</strong> JavaScript, Firebase(Firestore, Auth, Storage), PortOne, Gemini API<br>
-        <strong style="color:#fff;">Type:</strong> Serverless Architecture, MPA
+        <strong style="color:#fff;">Type:</strong> Serverless Architecture, MPA(Multi-Page Application)
     </div>
 
     <div class="project-gallery">
@@ -25,103 +26,24 @@
     </h3>
 
     <!-- System Architecture Diagram -->
-    <div style="background: #080c08; border: 1px solid #1e2e1e; border-radius: 12px; padding: 28px 32px; margin-bottom: 40px; font-family: 'Space Mono', monospace; font-size: 0.8em; line-height: 1.9; color: #8892b0;">
-
-        <!-- Client -->
-        <div style="text-align: center; margin-bottom: 16px;">
-            <div style="display: inline-flex; gap: 8px; flex-wrap: wrap; justify-content: center;">
-                <span style="background: #1a2a1a; border: 1px solid #2a4a2a; color: #9ab89a; padding: 5px 12px; border-radius: 6px; font-size: 0.88em;">index</span>
-                <span style="background: #1a2a1a; border: 1px solid #2a4a2a; color: #9ab89a; padding: 5px 12px; border-radius: 6px; font-size: 0.88em;">myPlant</span>
-                <span style="background: #1a2a1a; border: 1px solid #2a4a2a; color: #9ab89a; padding: 5px 12px; border-radius: 6px; font-size: 0.88em;">findPlant</span>
-                <span style="background: #1a2a1a; border: 1px solid #2a4a2a; color: #9ab89a; padding: 5px 12px; border-radius: 6px; font-size: 0.88em;">story</span>
-                <span style="background: #1a2a1a; border: 1px solid #2a4a2a; color: #9ab89a; padding: 5px 12px; border-radius: 6px; font-size: 0.88em;">payment</span>
-            </div>
-            <div style="color: #3a5a3a; font-size: 0.82em; margin-top: 6px;">Client — HTML / CSS / Vanilla JS</div>
-        </div>
-
-        <!-- 화살표 분기 -->
-        <div style="display: flex; justify-content: center; gap: 80px; color: #2a4a2a; margin: 2px 0; font-size: 0.9em;">
-            <span>↙ 직접 통신</span>
-            <span>↘ API 요청</span>
-        </div>
-
-        <!-- Firebase + Node.js 나란히 -->
-        <div style="display: flex; gap: 16px; margin: 10px 0; flex-wrap: wrap;">
-
-            <!-- Firebase -->
-            <div style="flex: 1; min-width: 200px; background: #0c160c; border: 1px solid #1e3a1e; border-radius: 10px; padding: 18px 20px;">
-                <div style="color: #8ca57c; font-weight: 700; font-size: 0.95em; margin-bottom: 12px;">Firebase (Serverless)</div>
-                <div style="display: flex; flex-direction: column; gap: 7px;">
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <span style="color: #4a7a4a; font-size: 0.8em;">●</span>
-                        <span style="color: #7a9a7a; font-size: 0.85em;">Auth &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;— 이메일 인증</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <span style="color: #4a7a4a; font-size: 0.8em;">●</span>
-                        <span style="color: #7a9a7a; font-size: 0.85em;">Firestore — 식물·피드·구독 DB</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <span style="color: #4a7a4a; font-size: 0.8em;">●</span>
-                        <span style="color: #7a9a7a; font-size: 0.85em;">Storage &nbsp;— 이미지 파일</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Node.js Server -->
-            <div style="flex: 1; min-width: 200px; background: #0e120c; border: 1px solid #2a3a1e; border-radius: 10px; padding: 18px 20px;">
-                <div style="color: #a0b880; font-weight: 700; font-size: 0.95em; margin-bottom: 12px;">Node.js Express Server</div>
-                <div style="display: flex; flex-direction: column; gap: 7px;">
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <span style="color: #5a7a3a; font-size: 0.8em;">→</span>
-                        <span style="color: #8a9a7a; font-size: 0.85em;">/api/identify &nbsp;&nbsp;— 식물 인식</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <span style="color: #5a7a3a; font-size: 0.8em;">→</span>
-                        <span style="color: #8a9a7a; font-size: 0.85em;">/api/diagnose &nbsp;— 병해충 진단</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <span style="color: #5a7a3a; font-size: 0.8em;">→</span>
-                        <span style="color: #8a9a7a; font-size: 0.85em;">/api/payments/verify — 결제 검증</span>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Node.js → 외부 API 화살표 -->
-        <div style="text-align: right; padding-right: calc(50% - 90px); color: #2a4a2a; margin: 2px 0; font-size: 0.85em;">↓ 외부 API 호출</div>
-
-        <!-- 외부 서비스 -->
-        <div style="display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap;">
-            <div style="background: #0c1008; border: 1px solid #263a14; border-radius: 8px; padding: 10px 16px; text-align: center; min-width: 130px;">
-                <div style="color: #7ab050; font-weight: 700; font-size: 0.88em;">Gemini API</div>
-                <div style="color: #3a5a20; font-size: 0.78em;">Google AI · 이미지 분석</div>
-            </div>
-            <div style="background: #0c1008; border: 1px solid #263a14; border-radius: 8px; padding: 10px 16px; text-align: center; min-width: 130px;">
-                <div style="color: #7ab050; font-weight: 700; font-size: 0.88em;">PortOne</div>
-                <div style="color: #3a5a20; font-size: 0.78em;">카카오페이 · 구독 결제</div>
-            </div>
-            <div style="background: #0c1008; border: 1px solid #263a14; border-radius: 8px; padding: 10px 16px; text-align: center; min-width: 130px;">
-                <div style="color: #7ab050; font-weight: 700; font-size: 0.88em;">Meta Pixel</div>
-                <div style="color: #3a5a20; font-size: 0.78em;">전환 추적 · 분석</div>
-            </div>
-        </div>
-
+    <div style="text-align: center; margin-bottom: 40px;">
+        <img src="plantnoon/6.png" class="project-img" style="width: 100%; height: auto; object-fit: contain; border-radius: 12px; border: 1px solid #1e2e1e;" alt="System Architecture">
+        <p style="color: #fff; font-size: 0.8rem; margin-top: 8px;">[System Architecture]</p>
     </div>
     
     <div class="tech-grid" style="margin-bottom: 50px; gap: 40px;">
         <div class="tech-category">
             <h4 style="color: #ffffff; font-size: 1.15rem; font-weight: 700; margin-bottom: 6px;">Plant Care & Data</h4>
             <ul class="desc-list" style="font-size: 0.95rem; line-height: 1.7; color: #ddd;">
-                <li>180일 기준 동적 케어 스케줄러 알고리즘</li>
-                <li>Chart.js 연동 실시간 성장 기록 시스템</li>
+                <li>180일 케어 스케줄 생성 + 이력 기반 누락률 분석</li>
+                <li>Chart.js 연동 성장 기록 시각화</li>
             </ul>
         </div>
         <div class="tech-category">
             <h4 style="color: #ffffff; font-size: 1.15rem; font-weight: 700; margin-bottom: 6px;">Community & AI</h4>
             <ul class="desc-list" style="font-size: 0.95rem; line-height: 1.7; color: #ddd;">
                 <li>Gemini API 활용 AI 식물 질병 진단 서비스</li>
-                <li>Intersection Observer 기반 무한 스크롤 피드</li>
+                <li>Firestore 커서(startAfter) 기반 페이지네이션으로 전체 조회 없는 점진적 피드 로딩</li>
             </ul>
         </div>
     </div>
@@ -135,7 +57,7 @@
             <li style="margin-bottom: 18px;"><strong style="color:#fff; font-size:1rem;">Frontend UI/UX:</strong> 반응형 웹 UI 설계 및 Vanilla JS 기반 비동기 데이터 통신 구현</li>
             <li style="margin-bottom: 18px;"><strong style="color:#fff; font-size:1rem;">Business Logic:</strong> 구독 결제 연동 및 권한 제어 시스템 전담 개발</li>
             <li style="margin-bottom: 18px;"><strong style="color:#fff; font-size:1rem;">Infra & Security:</strong> Firebase Storage CORS 정책 구성 및 <strong style="color:#fff;">Firestore Security Rules 기반 RBAC 구현</strong></li>
-            <li><strong style="color:#fff; font-size:1rem;">Data Architecture:</strong> 50여 종의 반려식물 특성 데이터를 직접 구조화하여 커스텀 DB 구축</li>
+            <li><strong style="color:#fff; font-size:1rem;">Data Modeling:</strong> 50여 종 반려식물의 관리 주기(물주기·분갈이·영양제)와 반려동물/유아 독성 여부를 일관된 스키마로 직접 구조화</li>
         </ul>
     </div>
 
@@ -162,7 +84,7 @@
             </p>
             <div style="text-align: center;">
                 <img src="plantnoon/7.png" class="project-img" style="width: 100%; max-width: 600px; height: auto; object-fit: contain; border-radius: 8px; filter: grayscale(0.2);" alt="DB ERD">
-                <p style="color: #555; font-size: 0.8rem; margin-top: 8px;">[Firestore NoSQL Data Modeling: 의도적 비정규화 적용]</p>
+                <p style="color: #fff; font-size: 0.8rem; margin-top: 8px;">[Firestore Data Model]</p>
             </div>
             <p class="desc-text" style="font-size: 0.95rem; line-height: 1.7; color: #bbb; margin-top: 15px;">
                 <strong style="color:#fff;">[Outcome]</strong> 런칭 시점부터 추가 쿼리 없는 데이터 구조를 완성하여, 논리적 계산 기준 <strong style="color:#8ca57c;">데이터 읽기(Read) 요청을 약 70~80% 절감</strong>하고 클라이언트 로딩 속도를 최적화
@@ -219,5 +141,5 @@
         </div>
     </div>
     
-    <a href="#" class="btn-link" style="margin-top: 50px;">View Code</a>
+    <a href="https://github.com/SVM-version2/SIKJIPSA.git" class="btn-link" style="margin-top: 50px;">View Code</a>
 </div>
